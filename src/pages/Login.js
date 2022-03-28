@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Login() {
+  const [email, validateEmail] = useState('');
+
+  const validateLogin = () => {
+    const regexEmail = /\S+@\S+\.\S+/;
+    const validateEmail = regex.test();
+    const minPassword = 6;
+  };
+
   return (
     <form>
       <label htmlFor="email">
