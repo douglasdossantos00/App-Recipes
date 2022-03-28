@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 
 function Login() {
-  const [email, validateEmail] = useState('');
+  // const [email, validateEmail] = useState('');
 
-  const validateLogin = () => {
-    const regexEmail = /\S+@\S+\.\S+/;
-    const validateEmail = regex.test();
-    const minPassword = 6;
-  };
+  // const validateLogin = () => {
+  //   const regexEmail = /\S+@\S+\.\S+/;
+  //   const validateEmail = regex.test();
+  //   const minPassword = 6;
+  // };
 
   return (
     <form>
