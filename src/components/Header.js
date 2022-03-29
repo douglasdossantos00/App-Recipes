@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header() {
+  const [input, setInput] = useState('false');
   let pageTitle = '';
+
   const checkLocationToSetTitle = () => {
     if (window.location.pathname === '/foods') {
       pageTitle = 'Foods';
@@ -41,6 +43,14 @@ function Header() {
     }
   };
   checkLocationToSetTitle();
+
+  const handleClick = () => {
+    if (input === 'true') {
+      setInput('false');
+    } else {
+      setInput('true');
+    }
+  };
   return (
     <header>
       <Link to="/profile">
@@ -59,6 +69,7 @@ function Header() {
         && (
           <button
             type="button"
+            onClick={ handleClick }
           >
             <img
               src={ searchIcon }
@@ -66,6 +77,14 @@ function Header() {
               data-testid="search-top-btn"
             />
           </button>)
+      }
+      {
+        input === 'true'
+        && <input
+          data-testid="search-input"
+          type="text"
+          placeholder="search recipe"
+        />
       }
 
     </header>
