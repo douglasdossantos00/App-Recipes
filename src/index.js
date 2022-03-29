@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import RecipesProvider from './context/RecipesProvider';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
