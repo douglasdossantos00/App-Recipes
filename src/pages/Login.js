@@ -1,14 +1,29 @@
-// import React, { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
 function Login() {
-  // const [email, validateEmail] = useState('');
+  const [newInputEmail, setInputEmail] = useState('');
+  const [newInputPassword, setInputPassword] = useState('');
 
-  // const validateLogin = () => {
-  //   const regexEmail = /\S+@\S+\.\S+/;
-  //   const validateEmail = regex.test();
-  //   const minPassword = 6;
-  // };
+  const handleChange = ({ target }) => {
+    setInputEmail(target.value);
+  };
+
+  const handleChangePassword = ({ target }) => {
+    setInputPassword(target.value);
+  };
+
+  const handleClick = () => {
+    setInputEmail('');
+    setInputPassword('');
+  };
+
+  const validateButton = () => {
+    const regex = /\S+@\S+\.\S+/;
+    const validEmail = regex.test(newInputEmail);
+    const minPass = 6;
+    if (validEmail && newInputPassword.length > minPass) return false;
+    return true;
+  };
 
   return (
     <form>
@@ -19,6 +34,8 @@ function Login() {
           data-testid="email-input"
           name="email"
           id="email"
+          value={ newInputEmail }
+          onChange={ handleChange }
         />
       </label>
       <label htmlFor="password">
@@ -28,11 +45,15 @@ function Login() {
           data-testid="password-input"
           name="password"
           id="password"
+          value={ newInputPassword }
+          onChange={ handleChangePassword }
         />
       </label>
       <button
         data-testid="login-submit-btn"
         type="button"
+        disabled={ validateButton() }
+        onClick={ handleClick }
       >
         Enter
       </button>
