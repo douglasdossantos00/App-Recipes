@@ -1,5 +1,5 @@
 const fetchFoodsByFilter = (filter, value) => {
-  if (filter === 'igredient') {
+  if (filter === 'ingredient') {
     return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`)
       .then((response) => response.json())
       .then((json) => json);
