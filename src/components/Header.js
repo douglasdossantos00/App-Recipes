@@ -1,49 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './header.css';
 
-function Header() {
+function Header({ pageTitle }) {
   const [input, setInput] = useState('false');
-  let pageTitle = '';
-
-  const checkLocationToSetTitle = () => {
-    if (window.location.pathname === '/foods') {
-      pageTitle = 'Foods';
-    }
-    if (window.location.pathname === '/drinks') {
-      pageTitle = 'Drinks';
-    }
-    if (window.location.pathname === '/profile') {
-      pageTitle = 'Profile';
-    }
-    if (window.location.pathname === '/explore') {
-      pageTitle = 'Explore';
-    }
-    if (window.location.pathname === '/done-recipes') {
-      pageTitle = 'Done Recipes';
-    }
-    if (window.location.pathname === '/favorite-recipes') {
-      pageTitle = 'Favorite Recipes';
-    }
-    if (window.location.pathname === '/explore/foods') {
-      pageTitle = 'Explore Foods';
-    }
-    if (window.location.pathname === '/explore/drinks') {
-      pageTitle = 'Explore Drinks';
-    }
-    if (window.location.pathname === '/explore/foods/ingredients') {
-      pageTitle = 'Explore Ingredients';
-    }
-    if (window.location.pathname === '/explore/drinks/ingredients') {
-      pageTitle = 'Explore Ingredients';
-    }
-    if (window.location.pathname === '/explore/foods/nationalities') {
-      pageTitle = 'Explore Nationalities';
-    }
-  };
-  checkLocationToSetTitle();
 
   const handleClick = () => {
     if (input === 'true') {
@@ -139,5 +102,8 @@ function Header() {
     </header>
   );
 }
+Header.propTypes = {
+  pageTitle: propTypes.string.isRequired,
+};
 
 export default Header;
