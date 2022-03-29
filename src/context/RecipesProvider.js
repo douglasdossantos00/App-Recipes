@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
+  const INITIAL_STATE = {
+    name: '',
+  };
+  const [state] = useState(INITIAL_STATE);
   return (
-    <RecipesContext.Provider value={ {} }>
+    <RecipesContext.Provider value={ state }>
       {children}
     </RecipesContext.Provider>
   );
