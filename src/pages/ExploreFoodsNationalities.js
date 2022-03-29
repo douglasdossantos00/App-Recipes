@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function ExploreFoodsNationalities() {
   return (
-    <Header pageTitle="Explore Foods Nationalites" />
+    <Header pageTitle="Explore Nationalities" />
   );
 }
 export default ExploreFoodsNationalities;
