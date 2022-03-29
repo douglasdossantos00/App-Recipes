@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function Login() {
+function Login({ history }) {
   const [newInputEmail, setInputEmail] = useState('');
   const [newInputPassword, setInputPassword] = useState('');
 
@@ -20,6 +21,7 @@ function Login() {
     localStorage.setItem('user', JSON.stringify(objEmail));
     setInputEmail('');
     setInputPassword('');
+    history.push('/foods');
   };
 
   const validateButton = () => {
@@ -65,5 +67,11 @@ function Login() {
     </form>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;
