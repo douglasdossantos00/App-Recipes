@@ -5,12 +5,10 @@ import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import RecipesProvider from './context/RecipesProvider';
-import Header from './components/Header';
 
 ReactDOM.render(
   <BrowserRouter>
     <RecipesProvider>
-      <Header />
       <App />
     </RecipesProvider>
   </BrowserRouter>,
