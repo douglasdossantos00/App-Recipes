@@ -4,7 +4,6 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
 import RecipesProvider from './context/RecipesProvider';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
