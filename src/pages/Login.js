@@ -13,6 +13,11 @@ function Login() {
   };
 
   const handleClick = () => {
+    const objEmail = { email: newInputEmail };
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    // https://stackoverflow.com/questions/38380462/syntaxerror-unexpected-token-o-in-json-at-position-1
+    localStorage.setItem('user', JSON.stringify(objEmail));
     setInputEmail('');
     setInputPassword('');
   };
