@@ -1,0 +1,14 @@
+.header-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-input {
+  display: flex;
+  justify-content: center;
+}
+
+.header-radio {
+  display: flex;
+  justify-content: space-evenly;
+}

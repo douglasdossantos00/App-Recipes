@@ -6,7 +6,7 @@ function RecipesProvider({ children }) {
   const INITIAL_STATE = {
     name: '',
   };
-  const [state, setState] = useState(INITIAL_STATE);
+  const [state] = useState(INITIAL_STATE);
   return (
     <RecipesContext.Provider value={ state }>
       {children}
