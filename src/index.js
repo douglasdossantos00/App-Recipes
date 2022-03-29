@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
 import RecipesProvider from './context/RecipesProvider';
 import './index.css';
