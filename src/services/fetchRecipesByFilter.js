@@ -1,21 +1,19 @@
 const fetchRecipesByFilter = (page, filterAndValue) => {
-  if (filterAndValue[0] === 'ingredient') {
-    const url = `https://www.${page}.com/api/json/v1/1/filter.php?i=${filterAndValue[1]}`;
-    console.log(url);
-    return fetch(url)
-      .then((response) => response.json())
-      .then((json) => json);
+  const filter = filterAndValue[0];
+  const value = filterAndValue[1];
+  let url = '';
+  if (filter === 'ingredient') {
+    url = `https://www.${page}.com/api/json/v1/1/filter.php?i=${value}`;
   }
-  if ((filterAndValue[0] === 'name')) {
-    return fetch(`https://www.${page}.com/api/json/v1/1/search.php?s=${filterAndValue[1]}`)
-      .then((response) => response.json())
-      .then((json) => json);
+  if ((filter === 'name')) {
+    url = `https://www.${page}.com/api/json/v1/1/search.php?s=${value}`;
   }
-  if ((filterAndValue[0] === 'first-letter' && filterAndValue[1].length === 1)) {
-    return fetch(`https://www.${page}.com/api/json/v1/1/search.php?f=${filterAndValue[1]}`)
-      .then((response) => response.json())
-      .then((json) => json);
+  if ((filter === 'first-letter' && value.length === 1)) {
+    url = `https://www.${page}.com/api/json/v1/1/search.php?f=${value}`;
   }
+  return fetch(url)
+    .then((response) => response.json())
+    .then((json) => json);
 };
 
 export default fetchRecipesByFilter;
