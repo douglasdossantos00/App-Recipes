@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import RecipesContext from '../context/RecipesContext';
+import '../components/cards.css';
 
 function Drinks({ history }) {
   const { recipesByFilter } = useContext(RecipesContext);
@@ -10,7 +11,7 @@ function Drinks({ history }) {
   return (
     <>
       <Header pageTitle="Drinks" history={ history } />
-      <div>
+      <div className="card-drinks">
         {drinks.length > 1 && drinks.map((drink, index) => {
           const maxRecipes = 12;
           if (index < maxRecipes) {
