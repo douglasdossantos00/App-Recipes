@@ -5,14 +5,45 @@ import RecipesContext from '../context/RecipesContext';
 import Card from '../components/Card';
 import '../components/cards.css';
 import Footer from '../components/Footer';
+import fetchRecipesByCategory from '../services/fetchRecipesByCategories';
 
 function Foods({ history }) {
-  const { recipesByFilter, meals, categoriesMeals } = useContext(RecipesContext);
+  const { recipesByFilter,
+    meals,
+    categoriesMeals,
+    setRecipes } = useContext(RecipesContext);
+
+  // const [isClicked, setIsClicked] = useState('false');
   const foods = recipesByFilter.meals || meals.meals || [];
   const categories = categoriesMeals.meals || [];
+
+  const handleClickCategories = async (category) => {
+    // if (isClicked === 'false') {
+    const recipes = await fetchRecipesByCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    console.log(recipes);
+    setRecipes(recipes);
+    // setIsClicked('true');
+    // } else {
+    //   setRecipes({});
+    //   setIsClicked('false');
+    // }
+  };
+
+  const handleClickAllCategories = () => {
+    setRecipes({});
+  };
   return (
     <>
       <Header pageTitle="Foods" history={ history } />
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ handleClickAllCategories }
+
+      >
+        All
+
+      </button>
       {categories.map((category, index) => {
         const maxCategories = 5;
         if (index < maxCategories) {
@@ -21,6 +52,9 @@ function Foods({ history }) {
               key={ index }
               type="button"
               data-testid={ `${category.strCategory}-category-filter` }
+              onClick={ () => {
+                handleClickCategories(category.strCategory);
+              } }
             >
               {category.strCategory}
 
@@ -30,7 +64,7 @@ function Foods({ history }) {
         return true;
       })}
       <div className="card-foods">
-        {foods.length > 1 && foods.map((food, index) => {
+        {foods.map((food, index) => {
           const maxRecipes = 12;
           if (index < maxRecipes) {
             return (

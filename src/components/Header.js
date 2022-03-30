@@ -109,31 +109,32 @@ function Header({ pageTitle, history }) {
         onClick={ async () => {
           if (filter === 'first-letter' && value.length > 1) {
             global.alert('Your search must have only 1 (one) character');
-          }
-          if (pageTitle === 'Foods') {
-            const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
-            || { meals: [] };
-            console.log({ recipes });
-            setRecipes(recipes);
-            if (!recipes.meals) {
-              global.alert('Sorry, we haven\'t found any recipes for these filters.');
-              return;
+          } else {
+            if (pageTitle === 'Foods') {
+              const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
+              // || { meals: [] };
+              setRecipes(recipes);
+              console.log(recipes);
+              if (!recipes.meals) {
+                global.alert('Sorry, we haven\'t found any recipes for these filters.');
+                return;
+              }
+              if (recipes.meals.length === 1) {
+                history.push(`/foods/${recipes.meals[0].idMeal}`);
+              }
             }
-            if (recipes.meals.length === 1) {
-              history.push(`/foods/${recipes.meals[0].idMeal}`);
-            }
-          }
-          if (pageTitle === 'Drinks') {
-            const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
-            || { drinks: [] };
-            if (!recipes.drinks) {
-              global.alert('Sorry, we haven\'t found any recipes for these filters.');
-              return;
-            }
-            setRecipes(recipes);
+            if (pageTitle === 'Drinks') {
+              const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
+              || { drinks: [] };
+              if (!recipes.drinks) {
+                global.alert('Sorry, we haven\'t found any recipes for these filters.');
+                return;
+              }
+              setRecipes(recipes);
 
-            if (recipes.drinks.length === 1) {
-              history.push(`/drinks/${recipes.drinks[0].idDrink}`);
+              if (recipes.drinks.length === 1) {
+                history.push(`/drinks/${recipes.drinks[0].idDrink}`);
+              }
             }
           }
         } }
