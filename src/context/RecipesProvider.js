@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
-  const [foodsByFilter, setFoodsByFilter] = useState({ meals: [], drinks: [] });
+  const [recipesByFilter, setRecipesByFilter] = useState({});
 
-  const getFoods = (recipes) => {
-    setFoodsByFilter(recipes);
+  const setRecipes = (recipes) => {
+    setRecipesByFilter(recipes);
   };
 
   return (
-    <RecipesContext.Provider value={ { foodsByFilter, getFoods } }>
+    <RecipesContext.Provider value={ { recipesByFilter, setRecipes } }>
       {children}
     </RecipesContext.Provider>
   );

@@ -1,4 +1,4 @@
-const fetchFoodsByFilter = (page, filterAndValue) => {
+const fetchRecipesByFilter = (page, filterAndValue) => {
   if (filterAndValue[0] === 'ingredient') {
     const url = `https://www.${page}.com/api/json/v1/1/filter.php?i=${filterAndValue[1]}`;
     console.log(url);
@@ -18,4 +18,4 @@ const fetchFoodsByFilter = (page, filterAndValue) => {
   }
 };
 
-export default fetchFoodsByFilter;
+export default fetchRecipesByFilter;

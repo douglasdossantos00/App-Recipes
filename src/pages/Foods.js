@@ -5,9 +5,8 @@ import RecipesContext from '../context/RecipesContext';
 import Card from '../components/Card';
 
 function Foods({ history }) {
-  const { foodsByFilter } = useContext(RecipesContext);
-  const foods = foodsByFilter.meals;
-  console.log(foods);
+  const { recipesByFilter } = useContext(RecipesContext);
+  const foods = recipesByFilter.meals || [];
   return (
     <>
       <Header pageTitle="Foods" history={ history } />

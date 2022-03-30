@@ -5,13 +5,13 @@ import RecipesContext from '../context/RecipesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './header.css';
-import fetchFoodsByFilter from '../services/fetchFoodsByFilter';
+import fetchRecipesByFilter from '../services/fetchRecipesByFilter';
 
 function Header({ pageTitle, history }) {
   const [input, setInput] = useState('false');
   const [filter, setFilter] = useState('');
   const [value, setValue] = useState('');
-  const { getFoods } = useContext(RecipesContext);
+  const { setRecipes } = useContext(RecipesContext);
 
   const handleClick = () => {
     if (input === 'true') {
@@ -111,16 +111,19 @@ function Header({ pageTitle, history }) {
             global.alert('Your search must have only 1 (one) character');
           }
           if (pageTitle === 'Foods') {
-            const recipes = await fetchFoodsByFilter('themealdb', [filter, value]);
-            getFoods(recipes);
-            if (recipes && recipes.meals.length === 1) {
+            const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
+            || { meals: [] };
+            setRecipes(recipes);
+            if (recipes.meals.length === 1) {
               history.push(`/foods/${recipes.meals[0].idMeal}`);
             }
-          } else {
-            const recipes = await fetchFoodsByFilter('thecocktaildb', [filter, value]);
-            getFoods(recipes);
+          }
+          if (pageTitle === 'Drinks') {
+            const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
+            || { drinks: [] };
+            setRecipes(recipes);
 
-            if (recipes && recipes.drinks.length === 1) {
+            if (recipes.drinks.length === 1) {
               history.push(`/drinks/${recipes.drinks[0].idDrink}`);
             }
           }
