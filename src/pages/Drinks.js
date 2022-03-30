@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Card from '../components/Card';
 import RecipesContext from '../context/RecipesContext';
 import '../components/cards.css';
+import Footer from '../components/Footer';
 
 function Drinks({ history }) {
   const { recipesByFilter } = useContext(RecipesContext);
@@ -26,6 +27,7 @@ function Drinks({ history }) {
           return true;
         })}
       </div>
+      <Footer />
     </>
   );
 }
