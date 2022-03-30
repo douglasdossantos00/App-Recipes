@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 function Login({ history }) {
   const [newInputEmail, setInputEmail] = useState('');
   const [newInputPassword, setInputPassword] = useState('');
-  console.log(history);
   const handleChange = ({ target }) => {
     setInputEmail(target.value);
   };

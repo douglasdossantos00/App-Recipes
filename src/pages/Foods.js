@@ -7,8 +7,8 @@ import '../components/cards.css';
 import Footer from '../components/Footer';
 
 function Foods({ history }) {
-  const { recipesByFilter } = useContext(RecipesContext);
-  const foods = recipesByFilter.meals || [];
+  const { recipesByFilter, meals } = useContext(RecipesContext);
+  const foods = recipesByFilter.meals || meals.meals || [];
   return (
     <>
       <Header pageTitle="Foods" history={ history } />

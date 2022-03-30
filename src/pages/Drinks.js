@@ -7,13 +7,13 @@ import '../components/cards.css';
 import Footer from '../components/Footer';
 
 function Drinks({ history }) {
-  const { recipesByFilter } = useContext(RecipesContext);
-  const drinks = recipesByFilter.drinks || [];
+  const { recipesByFilter, drinks } = useContext(RecipesContext);
+  const cocktails = recipesByFilter.drinks || drinks.drinks || [];
   return (
     <>
       <Header pageTitle="Drinks" history={ history } />
       <div className="card-drinks">
-        {drinks.length > 1 && drinks.map((drink, index) => {
+        {cocktails.length > 1 && cocktails.map((drink, index) => {
           const maxRecipes = 12;
           if (index < maxRecipes) {
             return (
