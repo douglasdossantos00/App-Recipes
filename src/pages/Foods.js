@@ -20,7 +20,6 @@ function Foods({ history }) {
   const handleClickCategories = async (category) => {
     if (isClicked === 'false') {
       const recipes = await fetchRecipesByCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-      console.log(recipes);
       setRecipes(recipes);
       setIsClicked('true');
     } else {
@@ -73,6 +72,8 @@ function Foods({ history }) {
                 index={ index }
                 name={ food.strMeal }
                 src={ food.strMealThumb }
+                page="foods"
+                idRecipe={ food.idMeal }
               />);
           }
           return true;

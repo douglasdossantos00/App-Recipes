@@ -71,6 +71,8 @@ function Drinks({ history }) {
                 index={ index }
                 name={ drink.strDrink }
                 src={ drink.strDrinkThumb }
+                page="drinks"
+                idRecipe={ drink.idDrink }
               />);
           }
           return true;
