@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './header.css';
+import fetchRecipesByFilter from '../services/fetchRecipesByFilter';
 
-function Header({ pageTitle }) {
+function Header({ pageTitle, history }) {
   const [input, setInput] = useState('false');
   const [filter, setFilter] = useState('');
   const [value, setValue] = useState('');
-  const { getFoods } = useContext(RecipesContext);
+  const { setRecipes } = useContext(RecipesContext);
 
   const handleClick = () => {
     if (input === 'true') {
@@ -60,12 +61,14 @@ function Header({ pageTitle }) {
   data-testid="search-input"
   type="text"
   placeholder="search recipe"
-  onChange={ ({ target }) => setValue(target.value) }
+  onChange={ ({ target }) => {
+    setValue(target.value);
+  } }
 />
         }
       </div>
       {
-        pageTitle === 'Foods'
+        (pageTitle === 'Foods' || pageTitle === 'Drinks')
 && (
   <>
     {' '}
@@ -103,7 +106,37 @@ function Header({ pageTitle }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ () => getFoods(filter, value) }
+        onClick={ async () => {
+          if (filter === 'first-letter' && value.length > 1) {
+            global.alert('Your search must have only 1 (one) character');
+          }
+          if (pageTitle === 'Foods') {
+            const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
+            || { meals: [] };
+            console.log({ recipes });
+            setRecipes(recipes);
+            if (!recipes.meals) {
+              global.alert('Sorry, we haven\'t found any recipes for these filters.');
+              return;
+            }
+            if (recipes.meals.length === 1) {
+              history.push(`/foods/${recipes.meals[0].idMeal}`);
+            }
+          }
+          if (pageTitle === 'Drinks') {
+            const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
+            || { drinks: [] };
+            if (!recipes.drinks) {
+              global.alert('Sorry, we haven\'t found any recipes for these filters.');
+              return;
+            }
+            setRecipes(recipes);
+
+            if (recipes.drinks.length === 1) {
+              history.push(`/drinks/${recipes.drinks[0].idDrink}`);
+            }
+          }
+        } }
       >
         Search
       </button>
@@ -117,7 +150,10 @@ function Header({ pageTitle }) {
   );
 }
 Header.propTypes = {
-  pageTitle: propTypes.string.isRequired,
+  pageTitle: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Header;

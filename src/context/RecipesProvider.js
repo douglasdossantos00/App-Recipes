@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
-import fetchFoodsByFilter from '../services/fetchFoodsByFilter';
 
 function RecipesProvider({ children }) {
-  const [foodsByFilter, setFoodsByFilter] = useState([]);
+  const [recipesByFilter, setRecipesByFilter] = useState({});
 
-  const getFoods = async (filter, value) => {
-    setFoodsByFilter(await fetchFoodsByFilter(filter, value));
+  const setRecipes = (recipes) => {
+    setRecipesByFilter(recipes);
   };
 
   return (
-    <RecipesContext.Provider value={ { foodsByFilter, getFoods } }>
+    <RecipesContext.Provider value={ { recipesByFilter, setRecipes } }>
       {children}
     </RecipesContext.Provider>
   );
 }
 
 RecipesProvider.propTypes = {
-  children: propTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 export default RecipesProvider;
