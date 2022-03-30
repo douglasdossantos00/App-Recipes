@@ -19,7 +19,8 @@ function Drinks({ history }) {
 
   const handleClickCategories = async (category) => {
     if (isClicked === 'false') {
-      const recipes = await fetchRecipesByCategory('thecocktaildb', category);
+      const recipes = await fetchRecipesByCategory(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+      console.log(recipes);
       setRecipes(recipes);
       setIsClicked('true');
     } else {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
@@ -13,20 +13,20 @@ function Foods({ history }) {
     categoriesMeals,
     setRecipes } = useContext(RecipesContext);
 
-  // const [isClicked, setIsClicked] = useState('false');
+  const [isClicked, setIsClicked] = useState('false');
   const foods = recipesByFilter.meals || meals.meals || [];
   const categories = categoriesMeals.meals || [];
 
   const handleClickCategories = async (category) => {
-    // if (isClicked === 'false') {
-    const recipes = await fetchRecipesByCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-    console.log(recipes);
-    setRecipes(recipes);
-    // setIsClicked('true');
-    // } else {
-    //   setRecipes({});
-    //   setIsClicked('false');
-    // }
+    if (isClicked === 'false') {
+      const recipes = await fetchRecipesByCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      console.log(recipes);
+      setRecipes(recipes);
+      setIsClicked('true');
+    } else {
+      setRecipes({});
+      setIsClicked('false');
+    }
   };
 
   const handleClickAllCategories = () => {
