@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import RecipesContext from '../context/RecipesContext';
+import Card from '../components/Card';
 
 function Foods({ history }) {
+  const { foodsByFilter } = useContext(RecipesContext);
+  const foods = foodsByFilter.meals;
+  console.log(foods);
   return (
-    <Header pageTitle="Foods" history={ history } />
+    <>
+      <Header pageTitle="Foods" history={ history } />
+      <div>
+        {foods.length > 1 && foods.map((food, index) => {
+          const maxRecipes = 12;
+          if (index < maxRecipes) {
+            return (
+              <Card
+                key={ index }
+                index={ index }
+                name={ food.strMeal }
+                src={ food.strMealThumb }
+              />);
+          }
+          return true;
+        })}
+      </div>
+    </>
   );
 }
 
