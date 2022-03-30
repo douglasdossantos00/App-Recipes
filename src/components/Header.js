@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './header.css';
+import fetchFoodsByFilter from '../services/fetchFoodsByFilter';
 
-function Header({ pageTitle }) {
+function Header({ pageTitle, history }) {
   const [input, setInput] = useState('false');
   const [filter, setFilter] = useState('');
   const [value, setValue] = useState('');
@@ -105,12 +106,23 @@ function Header({ pageTitle }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ () => {
-          console.log(value);
+        onClick={ async () => {
+          if (filter === 'first-letter' && value.length > 1) {
+            global.alert('Your search must have only 1 (one) character');
+          }
           if (pageTitle === 'Foods') {
-            getFoods('themealdb', [filter, value]);
+            const recipes = await fetchFoodsByFilter('themealdb', [filter, value]);
+            getFoods(recipes);
+            if (recipes && recipes.meals.length === 1) {
+              history.push(`/foods/${recipes.meals[0].idMeal}`);
+            }
           } else {
-            getFoods('thecocktaildb', [filter, value]);
+            const recipes = await fetchFoodsByFilter('thecocktaildb', [filter, value]);
+            getFoods(recipes);
+
+            if (recipes && recipes.drinks.length === 1) {
+              history.push(`/drinks/${recipes.drinks[0].idDrink}`);
+            }
           }
         } }
       >
@@ -126,7 +138,10 @@ function Header({ pageTitle }) {
   );
 }
 Header.propTypes = {
-  pageTitle: propTypes.string.isRequired,
+  pageTitle: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Header;

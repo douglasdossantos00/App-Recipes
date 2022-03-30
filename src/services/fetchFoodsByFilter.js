@@ -16,9 +16,6 @@ const fetchFoodsByFilter = (page, filterAndValue) => {
       .then((response) => response.json())
       .then((json) => json);
   }
-  if ((filterAndValue[0] === 'first-letter' && filterAndValue[1].length > 1)) {
-    return global.alert('Your search must have only 1 (one) character');
-  }
 };
 
 export default fetchFoodsByFilter;
