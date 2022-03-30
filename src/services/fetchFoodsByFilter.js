@@ -1,20 +1,22 @@
-const fetchFoodsByFilter = (filter, value) => {
-  if (filter === 'ingredient') {
-    return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`)
+const fetchFoodsByFilter = (page, filterAndValue) => {
+  if (filterAndValue[0] === 'ingredient') {
+    const url = `https://www.${page}.com/api/json/v1/1/filter.php?i=${filterAndValue[1]}`;
+    console.log(url);
+    return fetch(url)
       .then((response) => response.json())
       .then((json) => json);
   }
-  if ((filter === 'name')) {
-    return fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`)
+  if ((filterAndValue[0] === 'name')) {
+    return fetch(`https://www.${page}.com/api/json/v1/1/search.php?s=${filterAndValue[1]}`)
       .then((response) => response.json())
       .then((json) => json);
   }
-  if ((filter === 'first-letter' && value.length === 1)) {
-    return fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${value}`)
+  if ((filterAndValue[0] === 'first-letter' && filterAndValue[1].length === 1)) {
+    return fetch(`https://www.${page}.com/api/json/v1/1/search.php?f=${filterAndValue[1]}`)
       .then((response) => response.json())
       .then((json) => json);
   }
-  if ((filter === 'first-letter' && value.length > 1)) {
+  if ((filterAndValue[0] === 'first-letter' && filterAndValue[1].length > 1)) {
     return global.alert('Your search must have only 1 (one) character');
   }
 };

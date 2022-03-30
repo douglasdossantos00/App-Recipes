@@ -60,12 +60,14 @@ function Header({ pageTitle }) {
   data-testid="search-input"
   type="text"
   placeholder="search recipe"
-  onChange={ ({ target }) => setValue(target.value) }
+  onChange={ ({ target }) => {
+    setValue(target.value);
+  } }
 />
         }
       </div>
       {
-        pageTitle === 'Foods'
+        (pageTitle === 'Foods' || pageTitle === 'Drinks')
 && (
   <>
     {' '}
@@ -103,7 +105,14 @@ function Header({ pageTitle }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ () => getFoods(filter, value) }
+        onClick={ () => {
+          console.log(value);
+          if (pageTitle === 'Foods') {
+            getFoods('themealdb', [filter, value]);
+          } else {
+            getFoods('thecocktaildb', [filter, value]);
+          }
+        } }
       >
         Search
       </button>
