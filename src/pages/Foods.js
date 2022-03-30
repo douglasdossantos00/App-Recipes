@@ -7,11 +7,28 @@ import '../components/cards.css';
 import Footer from '../components/Footer';
 
 function Foods({ history }) {
-  const { recipesByFilter, meals } = useContext(RecipesContext);
+  const { recipesByFilter, meals, categoriesMeals } = useContext(RecipesContext);
   const foods = recipesByFilter.meals || meals.meals || [];
+  const categories = categoriesMeals.meals || [];
   return (
     <>
       <Header pageTitle="Foods" history={ history } />
+      {categories.map((category, index) => {
+        const maxCategories = 5;
+        if (index < maxCategories) {
+          return (
+            <button
+              key={ index }
+              type="button"
+              data-testid={ `${category.strCategory}-category-filter` }
+            >
+              {category.strCategory}
+
+            </button>
+          );
+        }
+        return true;
+      })}
       <div className="card-foods">
         {foods.length > 1 && foods.map((food, index) => {
           const maxRecipes = 12;
