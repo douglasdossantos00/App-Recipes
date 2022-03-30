@@ -113,7 +113,12 @@ function Header({ pageTitle, history }) {
           if (pageTitle === 'Foods') {
             const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
             || { meals: [] };
+            console.log({ recipes });
             setRecipes(recipes);
+            if (!recipes.meals) {
+              global.alert('Sorry, we haven\'t found any recipes for these filters.');
+              return;
+            }
             if (recipes.meals.length === 1) {
               history.push(`/foods/${recipes.meals[0].idMeal}`);
             }
@@ -121,6 +126,10 @@ function Header({ pageTitle, history }) {
           if (pageTitle === 'Drinks') {
             const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
             || { drinks: [] };
+            if (!recipes.drinks) {
+              global.alert('Sorry, we haven\'t found any recipes for these filters.');
+              return;
+            }
             setRecipes(recipes);
 
             if (recipes.drinks.length === 1) {
