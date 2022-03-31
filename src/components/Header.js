@@ -109,11 +109,9 @@ function Header({ pageTitle, history }) {
         onClick={ async () => {
           if (filter === 'first-letter' && value.length > 1) {
             global.alert('Your search must have only 1 (one) character');
-          }
-          if (pageTitle === 'Foods') {
-            const recipes = await fetchRecipesByFilter('themealdb', [filter, value])
-            || { meals: [] };
-            console.log({ recipes });
+          } else if (pageTitle === 'Foods') {
+            const recipes = await fetchRecipesByFilter('themealdb', [filter, value]);
+            // || { meals: [] };
             setRecipes(recipes);
             if (!recipes.meals) {
               global.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -122,10 +120,9 @@ function Header({ pageTitle, history }) {
             if (recipes.meals.length === 1) {
               history.push(`/foods/${recipes.meals[0].idMeal}`);
             }
-          }
-          if (pageTitle === 'Drinks') {
+          } else {
             const recipes = await fetchRecipesByFilter('thecocktaildb', [filter, value])
-            || { drinks: [] };
+              || { drinks: [] };
             if (!recipes.drinks) {
               global.alert('Sorry, we haven\'t found any recipes for these filters.');
               return;
