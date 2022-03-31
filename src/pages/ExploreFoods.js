@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import fetchRandomFoods from '../services/fetchRandomFoods';
 
 function ExploreFoods({ history }) {
+  const [mealId, setMealId] = useState('');
+
+  useEffect(() => {
+    const getRecipe = async () => {
+      const id = await fetchRandomFoods();
+      setMealId(id.meals[0].idMeal);
+    };
+    getRecipe();
+  }, []);
+
   const handleClick = ({ target: { id } }) => {
     if (id === 'explore-by-ingredient') {
       history.push('./foods/ingredients');
@@ -11,10 +23,8 @@ function ExploreFoods({ history }) {
     if (id === 'explore-by-nationality') {
       history.push('./foods/nationalities');
     }
-    // if (id === 'explore-by-nationality') {
-    //   history.push('./explore/foods/nationalities');
-    // }
   };
+
   return (
     <>
       <Header pageTitle="Explore Foods" />
@@ -34,14 +44,15 @@ function ExploreFoods({ history }) {
       >
         By Nationality
       </button>
-      <button
-        data-testid="explore-surprise"
-        id="explore-surprise"
-        type="button"
-        // onClick={ handleClick }
-      >
-        Surprise me!
-      </button>
+      <Link to={ `/foods/${mealId}` }>
+        <button
+          data-testid="explore-surprise"
+          id="explore-surprise"
+          type="button"
+        >
+          Surprise me!
+        </button>
+      </Link>
       <Footer />
     </>
   );

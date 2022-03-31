@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import fetchRandomDrinks from '../services/fetchRandomDrinks';
 
 function ExploreDrinks({ history }) {
+  const [drinkId, setDrinkId] = useState('');
+
+  useEffect(() => {
+    const getRecipe = async () => {
+      const id = await fetchRandomDrinks();
+      setDrinkId(id.drinks[0].idDrink);
+    };
+    getRecipe();
+  }, []);
+
   const handleClick = ({ target: { id } }) => {
     if (id === 'explore-by-ingredient') {
       history.push('./drinks/ingredients');
@@ -20,14 +32,15 @@ function ExploreDrinks({ history }) {
       >
         By Ingredient
       </button>
-      <button
-        data-testid="explore-surprise"
-        id="explore-surprise"
-        type="button"
-        // onClick={ handleClick }
-      >
-        Surprise me!
-      </button>
+      <Link to={ `/drinks/${drinkId}` }>
+        <button
+          data-testid="explore-surprise"
+          id="explore-surprise"
+          type="button"
+        >
+          Surprise me!
+        </button>
+      </Link>
       <Footer />
     </>
   );
