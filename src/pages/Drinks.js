@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import RecipesContext from '../context/RecipesContext';
 import '../components/cards.css';
 import Footer from '../components/Footer';
-import fetchRecipesByCategory from '../services/fetchRecipesByCategories';
+import ButtonCategory from '../components/ButtonCategory';
 
 function Drinks({ history }) {
   const { recipesByFilter,
@@ -13,21 +13,8 @@ function Drinks({ history }) {
     categoriesDrinks,
     setRecipes } = useContext(RecipesContext);
 
-  const [isClicked, setIsClicked] = useState('false');
   const cocktails = recipesByFilter.drinks || drinks.drinks || [];
   const categories = categoriesDrinks.drinks || [];
-
-  const handleClickCategories = async (category) => {
-    if (isClicked === 'false') {
-      const recipes = await fetchRecipesByCategory(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-      console.log(recipes);
-      setRecipes(recipes);
-      setIsClicked('true');
-    } else {
-      setRecipes({});
-      setIsClicked('false');
-    }
-  };
 
   const handleClickAllCategories = () => {
     setRecipes({});
@@ -48,15 +35,11 @@ function Drinks({ history }) {
         const maxCategories = 5;
         if (index < maxCategories) {
           return (
-            <button
-              key={ index }
-              type="button"
-              data-testid={ `${category.strCategory}-category-filter` }
-              onClick={ () => handleClickCategories(category.strCategory) }
-            >
-              {category.strCategory}
-
-            </button>
+            <ButtonCategory
+              category={ category.strCategory }
+              page="thecocktaildb"
+              id={ category.strCategory }
+            />
           );
         }
         return true;

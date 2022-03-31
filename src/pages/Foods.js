@@ -1,11 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import Card from '../components/Card';
 import '../components/cards.css';
 import Footer from '../components/Footer';
-import fetchRecipesByCategory from '../services/fetchRecipesByCategories';
+
+import ButtonCategory from '../components/ButtonCategory';
 
 function Foods({ history }) {
   const { recipesByFilter,
@@ -13,20 +14,8 @@ function Foods({ history }) {
     categoriesMeals,
     setRecipes } = useContext(RecipesContext);
 
-  const [isClicked, setIsClicked] = useState('false');
   const foods = recipesByFilter.meals || meals.meals || [];
   const categories = categoriesMeals.meals || [];
-
-  const handleClickCategories = async (category) => {
-    if (isClicked === 'false') {
-      const recipes = await fetchRecipesByCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-      setRecipes(recipes);
-      setIsClicked('true');
-    } else {
-      setRecipes({});
-      setIsClicked('false');
-    }
-  };
 
   const handleClickAllCategories = () => {
     setRecipes({});
@@ -47,17 +36,11 @@ function Foods({ history }) {
         const maxCategories = 5;
         if (index < maxCategories) {
           return (
-            <button
-              key={ index }
-              type="button"
-              data-testid={ `${category.strCategory}-category-filter` }
-              onClick={ () => {
-                handleClickCategories(category.strCategory);
-              } }
-            >
-              {category.strCategory}
-
-            </button>
+            <ButtonCategory
+              category={ category.strCategory }
+              page="themealdb"
+              id={ category.strCategory }
+            />
           );
         }
         return true;
