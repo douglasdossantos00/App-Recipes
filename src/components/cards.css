@@ -3,3 +3,18 @@
   max-width: 200px;
 }
 
+.recipe-photo {
+  margin: 10px;
+  max-width: 300px;
+}
+
+.card-recomendation img {
+  margin: 10px;
+  max-width: 200px;
+}
+
+.card-recommendation-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
