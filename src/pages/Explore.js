@@ -4,27 +4,30 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Explore({ history }) {
-  const handleClickFoods = () => {
-    history.push('./explore/foods');
-  };
-
-  const handleClickDrinks = () => {
-    history.push('./explore/drinks');
+  const handleClick = ({ target: { id } }) => {
+    if (id === 'explore-foods') {
+      history.push('./explore/foods');
+    }
+    if (id === 'explore-drinks') {
+      history.push('./explore/drinks');
+    }
   };
   return (
     <>
       <Header pageTitle="Explore" />
       <button
         data-testid="explore-foods"
+        id="explore-foods"
         type="button"
-        onClick={ handleClickFoods }
+        onClick={ handleClick }
       >
         Explore Foods
       </button>
       <button
         data-testid="explore-drinks"
+        id="explore-drinks"
         type="button"
-        onClick={ handleClickDrinks }
+        onClick={ handleClick }
       >
         Explore Drinks
       </button>
