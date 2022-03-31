@@ -6,6 +6,18 @@ function Explore() {
   return (
     <>
       <Header pageTitle="Explore" />
+      <button
+        data-testid="explore-foods"
+        type="button"
+      >
+        Explore Foods
+      </button>
+      <button
+        data-testid="explore-drinks"
+        type="button"
+      >
+        Explore Drinks
+      </button>
       <Footer />
     </>
   );
