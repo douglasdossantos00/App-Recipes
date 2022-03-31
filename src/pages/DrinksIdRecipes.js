@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -11,13 +12,13 @@ function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
   const { meals } = useContext(RecipesContext);
 
+  const { match: { params: { id } } } = props;
   useEffect(() => {
-    const { match: { params: { id } } } = props;
     const getDrink = async () => {
       setDrink(await fetchFoodById('thecocktaildb', id));
     };
     getDrink();
-  }, [props]);
+  }, [id]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -85,13 +86,15 @@ function DrinksIdRecipes(props) {
               return true;
             })}
           </section>
-          <button
-            className="start-recipes-footer"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </button>
+          <Link to={ `/drinks/${id}/in-progress` }>
+            <button
+              className="start-recipes-footer"
+              type="button"
+              data-testid="start-recipe-btn"
+            >
+              Start Recipe
+            </button>
+          </Link>
         </div>) }
     </div>
   );
