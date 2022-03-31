@@ -57,21 +57,17 @@ function Header({ pageTitle, history }) {
       <div className="header-input">
         {
           input === 'true'
-&& <input
-  data-testid="search-input"
-  type="text"
-  placeholder="search recipe"
-  onChange={ ({ target }) => {
-    setValue(target.value);
-  } }
-/>
-        }
-      </div>
-      {
-        (pageTitle === 'Foods' || pageTitle === 'Drinks')
 && (
-  <>
-    {' '}
+  <div>
+
+    <input
+      data-testid="search-input"
+      type="text"
+      placeholder="search recipe"
+      onChange={ ({ target }) => {
+        setValue(target.value);
+      } }
+    />
     <div className="header-radio">
       <label htmlFor="ingredient">
         <input
@@ -111,7 +107,6 @@ function Header({ pageTitle, history }) {
             global.alert('Your search must have only 1 (one) character');
           } else if (pageTitle === 'Foods') {
             const recipes = await fetchRecipesByFilter('themealdb', [filter, value]);
-            // || { meals: [] };
             setRecipes(recipes);
             if (!recipes.meals) {
               global.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -138,10 +133,9 @@ function Header({ pageTitle, history }) {
         Search
       </button>
     </div>
-  </>
-
-)
-      }
+  </div>)
+        }
+      </div>
 
     </header>
   );
