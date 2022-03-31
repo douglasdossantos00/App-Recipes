@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function CardRecommendation({ page, index, src, category, name, idRecipe }) {
   return (
     <Link to={ `/${page}/${idRecipe}` }>
-      <div data-testid={ `${index}-recomendation-card` }>
+      <div data-testid={ `${index}-recomendation-card` } className="card-recomendation">
         <img src={ src } alt="card-img" />
         <span>{category}</span>
         <h3 data-testid={ `${index}-recomendation-title` }>{name}</h3>

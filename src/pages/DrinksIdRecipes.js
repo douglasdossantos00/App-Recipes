@@ -5,6 +5,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import RecipesContext from '../context/RecipesContext';
 import CardRecommendation from '../components/CardRecommendation';
+import '../components/cards.css';
 
 function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
@@ -31,6 +32,7 @@ function DrinksIdRecipes(props) {
       { drink.drinks && (
         <div>
           <img
+            className="recipe-photo"
             src={ drink.drinks[0].strDrinkThumb }
             alt="recipe"
             data-testid="recipe-photo"
@@ -64,23 +66,27 @@ function DrinksIdRecipes(props) {
           </ul>
           <h3>Instructions</h3>
           <p data-testid="instructions">{drink.drinks[0].strInstructions}</p>
-          {meals.meals && meals.meals.map((meal, index) => {
-            const maxRecipes = 6;
-            if (index < maxRecipes) {
-              return (
-                <CardRecommendation
-                  key={ index }
-                  index={ index }
-                  name={ meal.strMeal }
-                  src={ meal.strMealThumb }
-                  page="foods"
-                  idRecipe={ meal.idMeal }
-                  category={ meal.strCategory }
-                />);
-            }
-            return true;
-          })}
+          <h3>Recommended</h3>
+          <section className="card-recommendation-container">
+            {meals.meals && meals.meals.map((meal, index) => {
+              const maxRecipes = 6;
+              if (index < maxRecipes) {
+                return (
+                  <CardRecommendation
+                    key={ index }
+                    index={ index }
+                    name={ meal.strMeal }
+                    src={ meal.strMealThumb }
+                    page="foods"
+                    idRecipe={ meal.idMeal }
+                    category={ meal.strCategory }
+                  />);
+              }
+              return true;
+            })}
+          </section>
           <button
+            className="start-recipes-footer"
             type="button"
             data-testid="start-recipe-btn"
           >
