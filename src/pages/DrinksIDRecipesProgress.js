@@ -13,7 +13,7 @@ function DrinksIdRecipesInProgress(props) {
   const { match: { params: { id } } } = props;
   useEffect(() => {
     const getFood = async () => {
-      setDrink(await fetchFoodById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
+      setDrink(await fetchFoodById(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`));
     };
     getFood();
   }, [id]);

@@ -24,7 +24,7 @@ describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, 
     cy.get('[data-testid="finish-recipe-btn"]');
   });
 
-  it('verifica elementos de uma receita de bebida', () => {
+  it.only('verifica elementos de uma receita de bebida', () => {
     cy.visit('http://localhost:3000/drinks/178319/in-progress', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;
