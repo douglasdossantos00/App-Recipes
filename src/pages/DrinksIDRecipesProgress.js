@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
-import saveInProgressRecipes from '../services/saveInProgressRecipes';
+import Checkboxes from '../components/Checkboxes';
 
 function DrinksIdRecipesProgress(props) {
   const [drink, setDrink] = useState({});
@@ -61,30 +61,15 @@ function DrinksIdRecipesProgress(props) {
           <h3>Ingredients</h3>
           <div>
             {ingredients.map((ingredient, index) => (
-              <label
-                data-testid={ `${index}-ingredient-step` }
+              <Checkboxes
                 key={ ingredient }
-                htmlFor="ingredient"
-              >
-
-                <input
-                  name="ingredient"
-                  type="checkbox"
-                  onClick={ () => {
-                    const checkboxes = document.getElementsByName('ingredient');
-                    let arrayIngredients = [];
-                    checkboxes.forEach((checkbox, indexIngredient) => {
-                      if (checkbox.checked) {
-                        arrayIngredients = [...arrayIngredients, indexIngredient];
-                      }
-                    });
-                    console.log(arrayIngredients);
-                    saveInProgressRecipes(arrayIngredients, [id, 'drinks']);
-                  } }
-                />
-                {measures[index]}
-                {ingredient}
-              </label>))}
+                page="cocktails"
+                idRecipe={ id }
+                index={ index }
+                ingredient={ ingredient }
+                measure={ measures[index] }
+              />
+            ))}
           </div>
           <h3>Instructions</h3>
           <p data-testid="instructions">{drink.drinks[0].strInstructions}</p>

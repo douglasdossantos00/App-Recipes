@@ -5,7 +5,7 @@ const saveInProgress = (ingredients, idAndPage) => {
   const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { cocktails: {}, meals: {} };
 
-  if (page === 'drinks') {
+  if (page === 'cocktails') {
     inProgress.cocktails[id] = ingredients;
   } else {
     inProgress.meals[id] = ingredients;
