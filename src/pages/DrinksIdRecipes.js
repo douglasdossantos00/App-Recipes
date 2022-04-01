@@ -30,7 +30,7 @@ function DrinksIdRecipes(props) {
     .map((measure) => measure[1]);
 
   const handleClickShare = () => {
-    const url = `http://localhost:3000/drinks/${id}`;
+    const url = `http://localhost:3000/foods/${id}`;
     global.alert('Link copied!');
     navigator.clipboard.writeText(url);
   };
