@@ -17,7 +17,7 @@ function FoodsIdRecipes(props) {
   const { match: { params: { id } } } = props;
   useEffect(() => {
     const getFood = async () => {
-      setFood(await fetchFoodById('themealdb', id));
+      setFood(await fetchFoodById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
     };
     getFood();
   }, [id]);

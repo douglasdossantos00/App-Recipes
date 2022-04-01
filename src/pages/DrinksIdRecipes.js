@@ -16,7 +16,7 @@ function DrinksIdRecipes(props) {
   const { match: { params: { id } } } = props;
   useEffect(() => {
     const getDrink = async () => {
-      setDrink(await fetchFoodById('thecocktaildb', id));
+      setDrink(await fetchFoodById(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`));
     };
     getDrink();
   }, [id]);
