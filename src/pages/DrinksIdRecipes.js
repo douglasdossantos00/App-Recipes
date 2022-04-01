@@ -14,12 +14,13 @@ function DrinksIdRecipes(props) {
   const [isShare, setIsShare] = useState(false);
 
   const { match: { params: { id } } } = props;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   useEffect(() => {
     const getDrink = async () => {
-      setDrink(await fetchFoodById(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`));
+      setDrink(await fetchFoodById(url));
     };
     getDrink();
-  }, [id]);
+  }, [url]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -31,8 +32,8 @@ function DrinksIdRecipes(props) {
     .map((measure) => measure[1]);
 
   const handleClickShare = () => {
-    const url = `http://localhost:3000/drinks/${id}`;
-    navigator.clipboard.writeText(url);
+    const Url = `http://localhost:3000/drinks/${id}`;
+    navigator.clipboard.writeText(Url);
     setIsShare(true);
   };
 
@@ -58,7 +59,7 @@ function DrinksIdRecipes(props) {
 
           </button>
           {isShare && <span>Link copied!</span>}
-          <ButtonFavorite id={ id } page="thecocktaildb" />
+          <ButtonFavorite url={ url } id={ id } />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>
           <ul>

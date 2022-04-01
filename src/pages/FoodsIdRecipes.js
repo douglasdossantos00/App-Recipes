@@ -15,12 +15,13 @@ function FoodsIdRecipes(props) {
   const [isShare, setIsShare] = useState(false);
 
   const { match: { params: { id } } } = props;
+  const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   useEffect(() => {
     const getFood = async () => {
-      setFood(await fetchFoodById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
+      setFood(await fetchFoodById(url));
     };
     getFood();
-  }, [id]);
+  }, [url]);
 
   const ingredients = food.meals && Object.entries(food.meals[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -32,8 +33,8 @@ function FoodsIdRecipes(props) {
     .map((measure) => measure[1]);
 
   const handleClickShare = () => {
-    const url = `http://localhost:3000/foods/${id}`;
-    navigator.clipboard.writeText(url);
+    const Url = `http://localhost:3000/foods/${id}`;
+    navigator.clipboard.writeText(Url);
     setIsShare(true);
   };
 
@@ -58,7 +59,7 @@ function FoodsIdRecipes(props) {
             />
           </button>
           {isShare && <span>Link copied!</span>}
-          <ButtonFavorite id={ id } page="themealdb" />
+          <ButtonFavorite url={ url } id={ id } />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <ul>

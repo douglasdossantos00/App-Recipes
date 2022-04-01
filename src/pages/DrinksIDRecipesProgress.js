@@ -6,17 +6,18 @@ import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 
-function DrinksIdRecipesInProgress(props) {
+function DrinksIdRecipesProgress(props) {
   const [drink, setDrink] = useState({});
   const [isShare, setIsShare] = useState(false);
 
   const { match: { params: { id } } } = props;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   useEffect(() => {
     const getFood = async () => {
-      setDrink(await fetchFoodById(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`));
+      setDrink(await fetchFoodById(url));
     };
     getFood();
-  }, [id]);
+  }, [url]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -28,8 +29,8 @@ function DrinksIdRecipesInProgress(props) {
     .map((measure) => measure[1]);
 
   const handleClickShare = () => {
-    const url = `http://localhost:3000/drinks/${id}`;
-    navigator.clipboard.writeText(url);
+    const Url = `http://localhost:3000/drinks/${id}`;
+    navigator.clipboard.writeText(Url);
     setIsShare(true);
   };
 
@@ -54,16 +55,19 @@ function DrinksIdRecipesInProgress(props) {
             />
           </button>
           {isShare && <span>Link copied!</span>}
-          <ButtonFavorite id={ id } page="themealdb" />
+          <ButtonFavorite url={ url } id={ id } />
           <h5 data-testid="recipe-category">{drink.drinks[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <div>
             {ingredients.map((ingredient, index) => (
-              <label key={ ingredient } htmlFor="ingredient">
+              <label
+                data-testid={ `${index}-ingredient-step` }
+                key={ ingredient }
+                htmlFor="ingredient"
+              >
 
                 <input
                   name="ingredient"
-                  data-testid={ `${index}-ingredient-step` }
                   type="checkbox"
                 />
                 {measures[index]}
@@ -85,11 +89,11 @@ function DrinksIdRecipesInProgress(props) {
     </div>
   );
 }
-DrinksIdRecipesInProgress.propTypes = {
+DrinksIdRecipesProgress.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
   }).isRequired,
 };
-export default DrinksIdRecipesInProgress;
+export default DrinksIdRecipesProgress;
