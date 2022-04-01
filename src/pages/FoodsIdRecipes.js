@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import RecipesContext from '../context/RecipesContext';
 import CardRecommendation from '../components/CardRecommendation';
 import '../components/cards.css';
+import ButtonFavorite from '../components/ButtonFavorite';
 
 function FoodsIdRecipes(props) {
   const [food, setFood] = useState({});
@@ -28,6 +29,13 @@ function FoodsIdRecipes(props) {
     .filter((keyAndValue) => keyAndValue[0]
       .includes('strMeasure') && keyAndValue[1])
     .map((measure) => measure[1]);
+
+  const handleClickShare = () => {
+    const url = `http://localhost:3000/foods/${id}`;
+    global.alert('Link copied!');
+    navigator.clipboard.writeText(url);
+  };
+
   return (
     <div>
       { food.meals && (
@@ -40,19 +48,16 @@ function FoodsIdRecipes(props) {
           />
           <h2 data-testid="recipe-title">{food.meals[0].strMeal}</h2>
           <button type="button">
-            <img
+            <input
+              type="image"
               src={ shareIcon }
               alt="shareIcon"
               data-testid="share-btn"
+              onClick={ handleClickShare }
             />
+
           </button>
-          <button type="button">
-            <img
-              src={ whiteHeartIcon }
-              alt="whiteHeartIcon"
-              data-testid="favorite-btn"
-            />
-          </button>
+          <ButtonFavorite id={ id } page="themealdb" />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <ul>
