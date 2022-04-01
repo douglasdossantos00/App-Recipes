@@ -9,8 +9,6 @@ function ButtonFavorite({ page, id }) {
   const [isClicked, setIsClicked] = useState('false');
   const [recipe, setRecipe] = useState({ meals: [{ id: '' }] });
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-  console.log(favorites);
-
   const checkLocalStorage = () => {
     const verify = favorites
       .find((favorite) => Object.values(favorite)[0] === id);

@@ -8,7 +8,6 @@ const saveFavorites = (recipe) => {
     name: recipe.strMeal || recipe.strDrink,
     image: recipe.strMealThumb || recipe.strDrinkThumb,
   };
-  console.log(object);
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const NameRecipe = Object.values(object)[1];
   const verify = favorites.find((favorite) => Object.values(favorite)[1] === NameRecipe);

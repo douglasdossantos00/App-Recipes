@@ -9,7 +9,6 @@ function ButtonCategory({ page, category, id }) {
   const handleClickCategories = async () => {
     if (isClicked === 'false') {
       const recipes = await fetchRecipesByCategory(`https://www.${page}.com/api/json/v1/1/filter.php?c=${category}`);
-      console.log(isClicked);
       setRecipes(recipes);
       setIsClicked('true');
     } else {
