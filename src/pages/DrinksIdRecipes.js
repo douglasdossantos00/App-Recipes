@@ -11,6 +11,7 @@ import ButtonFavorite from '../components/ButtonFavorite';
 function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
   const { meals } = useContext(RecipesContext);
+  const [isShare, setIsShare] = useState(false);
 
   const { match: { params: { id } } } = props;
   useEffect(() => {
@@ -30,9 +31,9 @@ function DrinksIdRecipes(props) {
     .map((measure) => measure[1]);
 
   const handleClickShare = () => {
-    const url = `http://localhost:3000/foods/${id}`;
-    global.alert('Link copied!');
+    const url = `http://localhost:3000/drinks/${id}`;
     navigator.clipboard.writeText(url);
+    setIsShare(true);
   };
 
   return (
@@ -56,6 +57,7 @@ function DrinksIdRecipes(props) {
             />
 
           </button>
+          {isShare && <span>Link copied!</span>}
           <ButtonFavorite id={ id } page="thecocktaildb" />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>

@@ -12,6 +12,7 @@ import ButtonFavorite from '../components/ButtonFavorite';
 function FoodsIdRecipes(props) {
   const [food, setFood] = useState({});
   const { drinks } = useContext(RecipesContext);
+  const [isShare, setIsShare] = useState(false);
 
   const { match: { params: { id } } } = props;
   useEffect(() => {
@@ -32,8 +33,8 @@ function FoodsIdRecipes(props) {
 
   const handleClickShare = () => {
     const url = `http://localhost:3000/foods/${id}`;
-    global.alert('Link copied!');
     navigator.clipboard.writeText(url);
+    setIsShare(true);
   };
 
   return (
@@ -55,8 +56,8 @@ function FoodsIdRecipes(props) {
               data-testid="share-btn"
               onClick={ handleClickShare }
             />
-
           </button>
+          {isShare && <span>Link copied!</span>}
           <ButtonFavorite id={ id } page="themealdb" />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
