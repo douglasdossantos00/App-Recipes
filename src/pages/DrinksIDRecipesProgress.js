@@ -5,6 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
+import saveInProgressRecipes from '../services/saveInProgressRecipes';
 
 function DrinksIdRecipesProgress(props) {
   const [drink, setDrink] = useState({});
@@ -69,6 +70,17 @@ function DrinksIdRecipesProgress(props) {
                 <input
                   name="ingredient"
                   type="checkbox"
+                  onClick={ () => {
+                    const checkboxes = document.getElementsByName('ingredient');
+                    let arrayIngredients = [];
+                    checkboxes.forEach((checkbox, indexIngredient) => {
+                      if (checkbox.checked) {
+                        arrayIngredients = [...arrayIngredients, indexIngredient];
+                      }
+                    });
+                    console.log(arrayIngredients);
+                    saveInProgressRecipes(arrayIngredients, [id, 'drinks']);
+                  } }
                 />
                 {measures[index]}
                 {ingredient}

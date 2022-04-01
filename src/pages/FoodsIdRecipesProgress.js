@@ -6,6 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
+import saveInProgressRecipes from '../services/saveInProgressRecipes';
 
 function FoodsIdRecipesProgress(props) {
   const [food, setFood] = useState({});
@@ -70,6 +71,7 @@ function FoodsIdRecipesProgress(props) {
                 <input
                   name="ingredient"
                   type="checkbox"
+                  onClick={ () => saveInProgressRecipes(index, [id, 'foods']) }
                 />
                 {measures[index]}
                 {ingredient}
