@@ -1,23 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import RecipesContext from '../context/RecipesContext';
 import CardRecommendation from '../components/CardRecommendation';
 import '../components/cards.css';
+import ButtonFavorite from '../components/ButtonFavorite';
 
 function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
   const { meals } = useContext(RecipesContext);
+  const [isShare, setIsShare] = useState(false);
 
+  const { match: { params: { id } } } = props;
   useEffect(() => {
-    const { match: { params: { id } } } = props;
     const getDrink = async () => {
       setDrink(await fetchFoodById('thecocktaildb', id));
     };
     getDrink();
-  }, [props]);
+  }, [id]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -27,6 +29,13 @@ function DrinksIdRecipes(props) {
     .filter((keyAndValue) => keyAndValue[0]
       .includes('strMeasure') && keyAndValue[1])
     .map((measure) => measure[1]);
+
+  const handleClickShare = () => {
+    const url = `http://localhost:3000/drinks/${id}`;
+    navigator.clipboard.writeText(url);
+    setIsShare(true);
+  };
+
   return (
     <div>
       { drink.drinks && (
@@ -39,19 +48,17 @@ function DrinksIdRecipes(props) {
           />
           <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
           <button type="button">
-            <img
+            <input
+              type="image"
               src={ shareIcon }
               alt="shareIcon"
               data-testid="share-btn"
+              onClick={ handleClickShare }
             />
+
           </button>
-          <button type="button">
-            <img
-              src={ whiteHeartIcon }
-              alt="whiteHeartIcon"
-              data-testid="favorite-btn"
-            />
-          </button>
+          {isShare && <span>Link copied!</span>}
+          <ButtonFavorite id={ id } page="thecocktaildb" />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>
           <ul>
@@ -85,13 +92,15 @@ function DrinksIdRecipes(props) {
               return true;
             })}
           </section>
-          <button
-            className="start-recipes-footer"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </button>
+          <Link to={ `/drinks/${id}/in-progress` }>
+            <button
+              className="start-recipes-footer"
+              type="button"
+              data-testid="start-recipe-btn"
+            >
+              Start Recipe
+            </button>
+          </Link>
         </div>) }
     </div>
   );
