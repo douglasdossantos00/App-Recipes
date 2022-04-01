@@ -14,11 +14,24 @@ function FoodsIdRecipesProgress(props) {
 
   const { match: { params: { id } } } = props;
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  const checkIngredientsInProgress = () => {
+    const ingredientsLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const allIngredients = ingredientsLocalStorage.meals[id];
+
+    allIngredients.forEach(() => {
+      const checkbox = document.getElementsByClassName('ingredient');
+      console.log(checkbox[0]);
+    });
+  };
+
+  checkIngredientsInProgress();
   useEffect(() => {
     const getFood = async () => {
       setFood(await fetchFoodById(url));
     };
     getFood();
+    checkIngredientsInProgress();
   }, [url]);
 
   const ingredients = food.meals && Object.entries(food.meals[0])
@@ -70,8 +83,20 @@ function FoodsIdRecipesProgress(props) {
 
                 <input
                   name="ingredient"
+                  className="ingredient"
+                  id={ index }
                   type="checkbox"
-                  onClick={ () => saveInProgressRecipes(index, [id, 'foods']) }
+                  onClick={ () => {
+                    const checkboxes = document.getElementsByName('ingredient');
+                    let arrayIngredients = [];
+                    checkboxes.forEach((checkbox, indexIngredient) => {
+                      if (checkbox.checked) {
+                        arrayIngredients = [...arrayIngredients, indexIngredient];
+                      }
+                    });
+                    console.log(arrayIngredients);
+                    saveInProgressRecipes(arrayIngredients, [id, 'foods']);
+                  } }
                 />
                 {measures[index]}
                 {ingredient}
