@@ -8,10 +8,11 @@ import Checkboxes from '../components/Checkboxes';
 import ButtonFinishRecipe from '../components/ButtonFinishRecipe';
 
 function DrinksIdRecipesProgress(props) {
-  const [drink, setDrink] = useState({});
+  const [drink, setDrink] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [isShare, setIsShare] = useState(false);
+
   const { match: { params: { id } } } = props;
   const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
 
