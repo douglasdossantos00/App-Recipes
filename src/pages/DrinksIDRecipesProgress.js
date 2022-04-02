@@ -1,35 +1,38 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 import Checkboxes from '../components/Checkboxes';
-import RecipesContext from '../context/RecipesContext';
+import ButtonFinishRecipe from '../components/ButtonFinishRecipe';
 
 function DrinksIdRecipesProgress(props) {
   const [drink, setDrink] = useState({});
+  const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
   const [isShare, setIsShare] = useState(false);
-  const { ingredientsLocalStorage } = useContext(RecipesContext);
-  console.log(ingredientsLocalStorage.length);
   const { match: { params: { id } } } = props;
   const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  const ingredientsAndMeasures = (recipe, stringAndFunction) => {
+    const result = Object.entries(recipe)
+      .filter((keyAndValue) => keyAndValue[0]
+        .includes(stringAndFunction[0]) && keyAndValue[1])
+      .map((ingredient) => ingredient[1]);
+    stringAndFunction[1](result);
+  };
+
   useEffect(() => {
     const getFood = async () => {
-      setDrink(await fetchFoodById(url));
+      const result = await fetchFoodById(url);
+      const recipe = result.drinks[0];
+      setDrink(recipe);
+      ingredientsAndMeasures(recipe, ['strIngredient', setIngredients]);
+      ingredientsAndMeasures(recipe, ['strMeasure', setMeasures]);
     };
     getFood();
   }, [url]);
-
-  const ingredients = drink.drinks && Object.entries(drink.drinks[0])
-    .filter((keyAndValue) => keyAndValue[0]
-      .includes('strIngredient') && keyAndValue[1])
-    .map((ingredient) => ingredient[1]);
-  const measures = drink.drinks && Object.entries(drink.drinks[0])
-    .filter((keyAndValue) => keyAndValue[0]
-      .includes('strMeasure') && keyAndValue[1])
-    .map((measure) => measure[1]);
 
   const handleClickShare = () => {
     const Url = `http://localhost:3000/drinks/${id}`;
@@ -39,15 +42,15 @@ function DrinksIdRecipesProgress(props) {
 
   return (
     <div>
-      { drink.drinks && (
+      { drink && (
         <div>
           <img
             className="recipe-photo"
-            src={ drink.drinks[0].strDrinkThumb }
+            src={ drink.strDrinkThumb }
             alt="recipe"
             data-testid="recipe-photo"
           />
-          <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
+          <h2 data-testid="recipe-title">{drink.strDrink}</h2>
           <button type="button">
             <input
               type="image"
@@ -59,7 +62,7 @@ function DrinksIdRecipesProgress(props) {
           </button>
           {isShare && <span>Link copied!</span>}
           <ButtonFavorite url={ url } id={ id } />
-          <h5 data-testid="recipe-category">{drink.drinks[0].strCategory}</h5>
+          <h5 data-testid="recipe-category">{drink.strCategory}</h5>
           <h3>Ingredients</h3>
           <div>
             {ingredients.map((ingredient, index) => {
@@ -84,17 +87,8 @@ function DrinksIdRecipesProgress(props) {
             })}
           </div>
           <h3>Instructions</h3>
-          <p data-testid="instructions">{drink.drinks[0].strInstructions}</p>
-          <Link to="/done-recipes">
-            <button
-              className="start-recipes-footer"
-              type="button"
-              data-testid="finish-recipe-btn"
-              disabled={ ingredients.length !== ingredientsLocalStorage.length }
-            >
-              Finish Recipe
-            </button>
-          </Link>
+          <p data-testid="instructions">{drink.strInstructions}</p>
+          <ButtonFinishRecipe lengthIngredients={ ingredients.length } />
         </div>) }
     </div>
   );

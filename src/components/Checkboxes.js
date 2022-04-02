@@ -4,14 +4,14 @@ import saveInProgress from '../services/saveInProgressRecipes';
 import RecipesContext from '../context/RecipesContext';
 
 function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(checked);
   const { setIngredientsLocalStorage } = useContext(RecipesContext);
 
   const handleClickIngredient = () => {
-    if (isClicked === true) {
-      setIsClicked(false);
-    } else {
+    if (!isClicked) {
       setIsClicked(true);
+    } else {
+      setIsClicked(false);
     }
     const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
     || { cocktails: {}, meals: {} };
@@ -38,7 +38,7 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
         id={ ingredient }
         type="checkbox"
         name="ingredient"
-        checked={ checked }
+        checked={ isClicked }
         onChange={ handleClickIngredient }
       />
       {measure}
