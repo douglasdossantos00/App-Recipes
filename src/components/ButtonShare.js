@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-function ButtonShare({ page, id }) {
+function ButtonShare({ page, id, testId }) {
   const [isShare, setIsShare] = useState(false);
   const handleClickShare = () => {
     const url = `http://localhost:3000/${page}/${id}`;
@@ -17,7 +17,7 @@ function ButtonShare({ page, id }) {
           type="image"
           src={ shareIcon }
           alt="shareIcon"
-          data-testid="share-btn"
+          data-testid={ testId }
           onClick={ handleClickShare }
         />
       </button>
@@ -28,6 +28,7 @@ function ButtonShare({ page, id }) {
 ButtonShare.propTypes = {
   page: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 
 };
 
