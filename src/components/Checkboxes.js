@@ -7,17 +7,6 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
   const [isClicked, setIsClicked] = useState(false);
   const { setIngredientsLocalStorage } = useContext(RecipesContext);
 
-  // const checkLocalStorage = () => {
-  //   const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   const allIngredients = ingredientsLocal
-  //   && ingredientsLocal[page][idRecipe];
-  //   const verify = allIngredients && allIngredients.some((number) => number === index);
-  //   if (allIngredients) setIsClicked(verify);
-  // };
-  // useEffect(() => {
-  //   checkLocalStorage();
-  // }, []);
-
   const handleClickIngredient = () => {
     if (isClicked === true) {
       setIsClicked(false);

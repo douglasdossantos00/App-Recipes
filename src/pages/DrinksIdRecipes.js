@@ -12,6 +12,7 @@ function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
   const { meals } = useContext(RecipesContext);
   const [isShare, setIsShare] = useState(false);
+  const [textButton, setTextButton] = useState('Start Recipe');
 
   const { match: { params: { id } } } = props;
   const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -20,7 +21,12 @@ function DrinksIdRecipes(props) {
       setDrink(await fetchFoodById(url));
     };
     getDrink();
-  }, [url]);
+    const ingredientsLocal = JSON
+      .parse(localStorage.getItem('inProgressRecipes')) || { cocktails: {} };
+    if (ingredientsLocal.cocktails[id]) {
+      setTextButton('Continue Recipe');
+    }
+  }, [url, id]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -99,7 +105,7 @@ function DrinksIdRecipes(props) {
               type="button"
               data-testid="start-recipe-btn"
             >
-              Start Recipe
+              {textButton}
             </button>
           </Link>
         </div>) }

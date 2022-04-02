@@ -13,6 +13,7 @@ function FoodsIdRecipes(props) {
   const [food, setFood] = useState({});
   const { drinks } = useContext(RecipesContext);
   const [isShare, setIsShare] = useState(false);
+  const [textButton, setTextButton] = useState('Start Recipe');
 
   const { match: { params: { id } } } = props;
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -21,7 +22,12 @@ function FoodsIdRecipes(props) {
       setFood(await fetchFoodById(url));
     };
     getFood();
-  }, [url]);
+    const ingredientsLocal = JSON
+      .parse(localStorage.getItem('inProgressRecipes')) || { meals: {} };
+    if (ingredientsLocal.meals[id]) {
+      setTextButton('Continue Recipe');
+    }
+  }, [url, id]);
 
   const ingredients = food.meals && Object.entries(food.meals[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -105,7 +111,7 @@ function FoodsIdRecipes(props) {
               type="button"
               data-testid="start-recipe-btn"
             >
-              Start Recipe
+              {textButton}
             </button>
           </Link>
         </div>) }
