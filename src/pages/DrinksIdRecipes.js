@@ -1,25 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import RecipesContext from '../context/RecipesContext';
 import CardRecommendation from '../components/CardRecommendation';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
+import ButtonShare from '../components/ButtonShare';
 
 function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
   const { meals } = useContext(RecipesContext);
-  const [isShare, setIsShare] = useState(false);
+  const [textButton, setTextButton] = useState('Start Recipe');
 
   const { match: { params: { id } } } = props;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   useEffect(() => {
     const getDrink = async () => {
-      setDrink(await fetchFoodById('thecocktaildb', id));
+      setDrink(await fetchFoodById(url));
     };
     getDrink();
-  }, [id]);
+    const ingredientsLocal = JSON
+      .parse(localStorage.getItem('inProgressRecipes')) || { cocktails: {} };
+    if (ingredientsLocal.cocktails[id]) {
+      setTextButton('Continue Recipe');
+    }
+  }, [url, id]);
 
   const ingredients = drink.drinks && Object.entries(drink.drinks[0])
     .filter((keyAndValue) => keyAndValue[0]
@@ -29,12 +35,6 @@ function DrinksIdRecipes(props) {
     .filter((keyAndValue) => keyAndValue[0]
       .includes('strMeasure') && keyAndValue[1])
     .map((measure) => measure[1]);
-
-  const handleClickShare = () => {
-    const url = `http://localhost:3000/drinks/${id}`;
-    navigator.clipboard.writeText(url);
-    setIsShare(true);
-  };
 
   return (
     <div>
@@ -47,18 +47,9 @@ function DrinksIdRecipes(props) {
             data-testid="recipe-photo"
           />
           <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
-          <button type="button">
-            <input
-              type="image"
-              src={ shareIcon }
-              alt="shareIcon"
-              data-testid="share-btn"
-              onClick={ handleClickShare }
-            />
 
-          </button>
-          {isShare && <span>Link copied!</span>}
-          <ButtonFavorite id={ id } page="thecocktaildb" />
+          <ButtonShare page="drinks" id={ id } />
+          <ButtonFavorite url={ url } id={ id } />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>
           <ul>
@@ -98,7 +89,7 @@ function DrinksIdRecipes(props) {
               type="button"
               data-testid="start-recipe-btn"
             >
-              Start Recipe
+              {textButton}
             </button>
           </Link>
         </div>) }
