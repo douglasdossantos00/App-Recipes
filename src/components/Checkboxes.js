@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import saveInProgress from '../services/saveInProgressRecipes';
+import RecipesContext from '../context/RecipesContext';
 
 function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
   const [isClicked, setIsClicked] = useState('false');
+  const { setIngredientsLocalStorage } = useContext(RecipesContext);
 
   const checkLocalStorage = () => {
-    const ingredientsLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const allIngredients = ingredientsLocalStorage
-    && ingredientsLocalStorage[page][idRecipe];
+    const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const allIngredients = ingredientsLocal
+    && ingredientsLocal[page][idRecipe];
     if (allIngredients) setIsClicked(allIngredients.some((number) => number === index));
   };
   useEffect(() => {
@@ -21,9 +23,9 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
     } else {
       setIsClicked('true');
     }
-    const ingredientsLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
     || { cocktails: {}, meals: {} };
-    const allIngredients = ingredientsLocalStorage[page][idRecipe] || [];
+    const allIngredients = ingredientsLocal[page][idRecipe] || [];
     let arrayIngredients = [];
     const verify = allIngredients.some((number) => number === index);
     if (verify) {
@@ -31,7 +33,7 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
     } else {
       arrayIngredients = [...allIngredients, index];
     }
-
+    setIngredientsLocalStorage(arrayIngredients);
     saveInProgress(arrayIngredients, [idRecipe, page]);
   };
 

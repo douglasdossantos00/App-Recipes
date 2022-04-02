@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 import Checkboxes from '../components/Checkboxes';
+import RecipesContext from '../context/RecipesContext';
 
 function FoodsIdRecipesProgress(props) {
   const [food, setFood] = useState({});
   const [isShare, setIsShare] = useState(false);
+  const { ingredientsLocalStorage } = useContext(RecipesContext);
 
   const { match: { params: { id } } } = props;
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -80,6 +81,7 @@ function FoodsIdRecipesProgress(props) {
               className="start-recipes-footer"
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ ingredients.length !== ingredientsLocalStorage.length }
             >
               Finish Recipe
             </button>
