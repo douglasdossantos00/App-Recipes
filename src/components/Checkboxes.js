@@ -1,27 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import saveInProgress from '../services/saveInProgressRecipes';
 import RecipesContext from '../context/RecipesContext';
 
-function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
-  const [isClicked, setIsClicked] = useState('false');
+function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
+  const [isClicked, setIsClicked] = useState(false);
   const { setIngredientsLocalStorage } = useContext(RecipesContext);
 
-  const checkLocalStorage = () => {
-    const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const allIngredients = ingredientsLocal
-    && ingredientsLocal[page][idRecipe];
-    if (allIngredients) setIsClicked(allIngredients.some((number) => number === index));
-  };
-  useEffect(() => {
-    checkLocalStorage();
-  }, []);
+  // const checkLocalStorage = () => {
+  //   const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   const allIngredients = ingredientsLocal
+  //   && ingredientsLocal[page][idRecipe];
+  //   const verify = allIngredients && allIngredients.some((number) => number === index);
+  //   if (allIngredients) setIsClicked(verify);
+  // };
+  // useEffect(() => {
+  //   checkLocalStorage();
+  // }, []);
 
   const handleClickIngredient = () => {
-    if (isClicked === 'true') {
-      setIsClicked('false');
+    if (isClicked === true) {
+      setIsClicked(false);
     } else {
-      setIsClicked('true');
+      setIsClicked(true);
     }
     const ingredientsLocal = JSON.parse(localStorage.getItem('inProgressRecipes'))
     || { cocktails: {}, meals: {} };
@@ -48,7 +49,7 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
         id={ ingredient }
         type="checkbox"
         name="ingredient"
-        checked={ isClicked }
+        checked={ checked }
         onChange={ handleClickIngredient }
       />
       {measure}
@@ -62,6 +63,7 @@ Checkboxes.propTypes = {
   measure: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
   idRecipe: PropTypes.string.isRequired,
+  checked: PropTypes.string.isRequired,
 
 };
 

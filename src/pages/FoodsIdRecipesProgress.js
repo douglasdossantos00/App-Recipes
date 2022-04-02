@@ -63,20 +63,30 @@ function FoodsIdRecipesProgress(props) {
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <div>
-            {ingredients.map((ingredient, index) => (
-              <Checkboxes
-                key={ ingredient }
-                page="meals"
-                idRecipe={ id }
-                index={ index }
-                ingredient={ ingredient }
-                measure={ measures[index] }
-              />
-            ))}
+            {ingredients.map((ingredient, index) => {
+              const ingredientsLocal = JSON
+                .parse(localStorage.getItem('inProgressRecipes'));
+              const allIngredients = ingredientsLocal
+               && ingredientsLocal.meals[id];
+              const verify = allIngredients && allIngredients
+                .some((number) => number === index);
+              return (
+
+                <Checkboxes
+                  key={ ingredient }
+                  page="meals"
+                  idRecipe={ id }
+                  index={ index }
+                  ingredient={ ingredient }
+                  measure={ measures[index] }
+                  checked={ verify && 'true' }
+                />
+              );
+            })}
           </div>
           <h3>Instructions</h3>
           <p data-testid="instructions">{food.meals[0].strInstructions}</p>
-          <Link to={ `/foods/${id}/in-progress` }>
+          <Link to="/done-recipes">
             <button
               className="start-recipes-footer"
               type="button"
