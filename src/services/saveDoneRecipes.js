@@ -1,4 +1,4 @@
-const saveFavorites = (recipe, date) => {
+const saveDoneRecipes = (recipe, date) => {
   const object = {
     id: recipe.idMeal || recipe.idDrink,
     type: recipe.strMeal ? 'food' : 'drink',
@@ -8,19 +8,19 @@ const saveFavorites = (recipe, date) => {
     name: recipe.strMeal || recipe.strDrink,
     image: recipe.strMealThumb || recipe.strDrinkThumb,
     doneDate: date,
-    // tags: array-de-tags-da-receita-ou-array-vazio
+    tags: recipe.strTags || [],
   };
-  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const dones = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const NameRecipe = Object.values(object)[1];
-  const verify = favorites.find((favorite) => Object.values(favorite)[1] === NameRecipe);
+  const verify = dones.find((favorite) => Object.values(favorite)[1] === NameRecipe);
   if (!verify) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, object]));
+    localStorage.setItem('doneRecipes', JSON.stringify([...dones, object]));
   } else {
-    const newFavorites = favorites
+    const newDones = dones
       .filter((item) => Object.values(item)[1] !== NameRecipe);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    localStorage.setItem('doneRecipes', JSON.stringify(newDones));
   }
 
   return true;
 };
-export default saveFavorites;
+export default saveDoneRecipes;

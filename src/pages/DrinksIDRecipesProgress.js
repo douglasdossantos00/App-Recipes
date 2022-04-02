@@ -6,14 +6,24 @@ import ButtonFavorite from '../components/ButtonFavorite';
 import Checkboxes from '../components/Checkboxes';
 import ButtonFinishRecipe from '../components/ButtonFinishRecipe';
 import ButtonShare from '../components/ButtonShare';
+import saveDoneRecipes from '../services/saveDoneRecipes';
 
 function DrinksIdRecipesProgress(props) {
   const [drink, setDrink] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [date, setDate] = useState('');
 
   const { match: { params: { id } } } = props;
   const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  const fullDate = () => {
+    const currentDate = new Date();
+    const arrayDate = JSON.stringify(currentDate).split('-').join('T').split('T');
+    const year = currentDate.getFullYear();
+    const dateString = `${arrayDate[2]}/${arrayDate[1]}/${year}`;
+    setDate(dateString);
+  };
 
   const ingredientsAndMeasures = (recipe, stringAndFunction) => {
     const result = Object.entries(recipe)
@@ -32,6 +42,7 @@ function DrinksIdRecipesProgress(props) {
       ingredientsAndMeasures(recipe, ['strMeasure', setMeasures]);
     };
     getFood();
+    fullDate();
   }, [url]);
 
   return (
@@ -75,7 +86,10 @@ function DrinksIdRecipesProgress(props) {
           </div>
           <h3>Instructions</h3>
           <p data-testid="instructions">{drink.strInstructions}</p>
-          <ButtonFinishRecipe lengthIngredients={ ingredients.length } />
+          <ButtonFinishRecipe
+            lengthIngredients={ ingredients.length }
+            handleButtonFinish={ () => saveDoneRecipes(drink, date) }
+          />
         </div>) }
     </div>
   );

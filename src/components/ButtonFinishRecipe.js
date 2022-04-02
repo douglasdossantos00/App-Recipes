@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 
-function ButtonFinishRecipe({ lengthIngredients }) {
+function ButtonFinishRecipe({ lengthIngredients, handleButtonFinish }) {
   const { ingredientsLocalStorage } = useContext(RecipesContext);
   return (
     <Link to="/done-recipes">
@@ -12,6 +12,7 @@ function ButtonFinishRecipe({ lengthIngredients }) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ lengthIngredients !== ingredientsLocalStorage.length }
+        onClick={ handleButtonFinish }
       >
         Finish Recipe
       </button>
@@ -20,6 +21,7 @@ function ButtonFinishRecipe({ lengthIngredients }) {
 }
 ButtonFinishRecipe.propTypes = {
   lengthIngredients: PropTypes.number.isRequired,
+  handleButtonFinish: PropTypes.func.isRequired,
 
 };
 
