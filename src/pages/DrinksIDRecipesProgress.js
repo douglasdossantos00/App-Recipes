@@ -82,7 +82,7 @@ function DrinksIdRecipesProgress(props) {
                   index={ index }
                   ingredient={ ingredient }
                   measure={ measures[index] }
-                  checked={ verify && 'true' }
+                  checked={ verify }
                 />
               );
             })}

@@ -52,7 +52,7 @@ Checkboxes.propTypes = {
   measure: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
   idRecipe: PropTypes.string.isRequired,
-  checked: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
 
 };
 
