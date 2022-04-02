@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import saveInProgress from '../services/saveInProgressRecipes';
 
 function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState('false');
 
   const checkLocalStorage = () => {
     const ingredientsLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -16,30 +16,38 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe }) {
   }, []);
 
   const handleClickIngredient = () => {
-    setIsClicked(!isClicked);
-    const checkboxes = document.getElementsByName('ingredient');
+    if (isClicked === 'true') {
+      setIsClicked('false');
+    } else {
+      setIsClicked('true');
+    }
+    const ingredientsLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    || { cocktails: {}, meals: {} };
+    const allIngredients = ingredientsLocalStorage[page][idRecipe] || [];
     let arrayIngredients = [];
-    checkboxes.forEach((checkbox, indexIngredient) => {
-      if (checkbox.checked) {
-        arrayIngredients = [...arrayIngredients, indexIngredient];
-      }
-    });
-    console.log(arrayIngredients);
+    const verify = allIngredients.some((number) => number === index);
+    if (verify) {
+      arrayIngredients = allIngredients.filter((item) => item !== index);
+    } else {
+      arrayIngredients = [...allIngredients, index];
+    }
+
     saveInProgress(arrayIngredients, [idRecipe, page]);
   };
 
   return (
     <label
-      data-testid={ `${index}-ingredient-step` }
       key={ ingredient }
-      htmlFor="ingredient"
+      htmlFor={ ingredient }
+      data-testid={ `${index}-ingredient-step` }
     >
 
       <input
-        name="ingredient"
+        id={ ingredient }
         type="checkbox"
+        name="ingredient"
         checked={ isClicked }
-        onClick={ handleClickIngredient }
+        onChange={ handleClickIngredient }
       />
       {measure}
       {ingredient}
