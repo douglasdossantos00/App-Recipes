@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 import Checkboxes from '../components/Checkboxes';
 import RecipesContext from '../context/RecipesContext';
+import ButtonShare from '../components/ButtonShare';
 
 function FoodsIdRecipesProgress(props) {
   const [food, setFood] = useState({});
-  const [isShare, setIsShare] = useState(false);
   const { ingredientsLocalStorage } = useContext(RecipesContext);
 
   const { match: { params: { id } } } = props;
@@ -32,12 +31,6 @@ function FoodsIdRecipesProgress(props) {
       .includes('strMeasure') && keyAndValue[1])
     .map((measure) => measure[1]);
 
-  const handleClickShare = () => {
-    const Url = `http://localhost:3000/foods/${id}`;
-    navigator.clipboard.writeText(Url);
-    setIsShare(true);
-  };
-
   return (
     <div>
       { food.meals && (
@@ -49,16 +42,7 @@ function FoodsIdRecipesProgress(props) {
             data-testid="recipe-photo"
           />
           <h2 data-testid="recipe-title">{food.meals[0].strMeal}</h2>
-          <button type="button">
-            <input
-              type="image"
-              src={ shareIcon }
-              alt="shareIcon"
-              data-testid="share-btn"
-              onClick={ handleClickShare }
-            />
-          </button>
-          {isShare && <span>Link copied!</span>}
+          <ButtonShare page="foods" id={ id } />
           <ButtonFavorite url={ url } id={ id } />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
