@@ -5,6 +5,11 @@ const saveInProgress = (ingredients, idAndPage) => {
   const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { cocktails: {}, meals: {} };
 
+  if (ingredients.length === 0) {
+    delete inProgress[page][id];
+    return localStorage
+      .setItem('inProgressRecipes', JSON.stringify(inProgress));
+  }
   if (page === 'cocktails') {
     inProgress.cocktails[id] = ingredients;
   } else {

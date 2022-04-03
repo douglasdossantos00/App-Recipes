@@ -1,3 +1,5 @@
+import saveInProgress from './saveInProgressRecipes';
+
 const saveDoneRecipes = (recipe, date) => {
   const object = {
     id: recipe.idMeal || recipe.idDrink,
@@ -10,17 +12,15 @@ const saveDoneRecipes = (recipe, date) => {
     doneDate: date,
     tags: [recipe.strTags] || [],
   };
+  const page = object.type === 'food' ? 'meals' : 'cocktails';
+  console.log(page, object.id);
+  saveInProgress([], [object.id, page]);
   const dones = JSON.parse(localStorage.getItem('doneRecipes')) || [];
-  const NameRecipe = Object.values(object)[1];
-  const verify = dones.find((favorite) => Object.values(favorite)[1] === NameRecipe);
+  const NameRecipe = Object.values(object)[0];
+  const verify = dones.find((favorite) => Object.values(favorite)[0] === NameRecipe);
   if (!verify) {
     localStorage.setItem('doneRecipes', JSON.stringify([...dones, object]));
-  } else {
-    const newDones = dones
-      .filter((item) => Object.values(item)[1] !== NameRecipe);
-    localStorage.setItem('doneRecipes', JSON.stringify(newDones));
   }
-
   return true;
 };
 export default saveDoneRecipes;

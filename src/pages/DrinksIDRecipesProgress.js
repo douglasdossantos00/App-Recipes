@@ -57,7 +57,7 @@ function DrinksIdRecipesProgress(props) {
           />
           <h2 data-testid="recipe-title">{drink.strDrink}</h2>
 
-          <ButtonShare page="drinks" id={ id } />
+          <ButtonShare page="drinks" id={ id } testID="share-btn" />
           <ButtonFavorite url={ url } id={ id } />
 
           <h5 data-testid="recipe-category">{drink.strCategory}</h5>
@@ -87,7 +87,7 @@ function DrinksIdRecipesProgress(props) {
           <h3>Instructions</h3>
           <p data-testid="instructions">{drink.strInstructions}</p>
           <ButtonFinishRecipe
-            lengthIngredients={ ingredients.length }
+            lengthIngredients={ [ingredients.length, 'cocktails', id] }
             handleButtonFinish={ () => saveDoneRecipes(drink, date) }
           />
         </div>) }
