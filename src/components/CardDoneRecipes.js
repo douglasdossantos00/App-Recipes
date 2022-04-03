@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './cards.css';
-import shareIcon from '../images/shareIcon.svg';
+import { Link } from 'react-router-dom';
+import ButtonShare from './ButtonShare';
 
 function CardDoneRecipes(
   { index,
@@ -14,33 +15,23 @@ function CardDoneRecipes(
     id,
     page,
   },
-
 ) {
-  const [isShare, setIsShare] = useState(false);
-  const handleClickShare = () => {
-    const url = `http://localhost:3000/${page}/${id}`;
-    navigator.clipboard.writeText(url);
-    setIsShare(true);
-  };
   return (
-
     <div data-testid={ `${index}-recipe-card` } className="cards">
-      <img src={ src } alt="card-img" data-testid={ `${index}-horizontal-image` } />
-      <span>{nationality}</span>
-      <span data-testid={ `${index}-horizontal-top-text` }>{category}</span>
-      <div>
-        <button type="button">
-          <input
-            type="image"
-            src={ shareIcon }
-            alt="shareIcon"
-            data-testid={ `${index}-horizontal-share-btn"` }
-            onClick={ handleClickShare }
-          />
-        </button>
-        {isShare && <span>Link copied!</span>}
-      </div>
-      <span data-testid={ `${index}-horizontal-name` }>{name}</span>
+      <Link to={ `/${page}s/${id}` }>
+        <img src={ src } alt="card-img" data-testid={ `${index}-horizontal-image` } />
+        <span data-testid={ `${index}-horizontal-top-text` }>
+
+          {page === 'food' ? `${nationality} - ${category}` : `${nationality}`}
+
+        </span>
+        <span data-testid={ `${index}-horizontal-name` }>{name}</span>
+      </Link>
+      <ButtonShare
+        testID={ `${index}-horizontal-share-btn` }
+        page={ `${page}s` }
+        id={ id }
+      />
       <span data-testid={ `${index}-horizontal-done-date` }>{date}</span>
       {
         tags.map((elem) => (
