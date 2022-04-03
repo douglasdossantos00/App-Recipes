@@ -8,7 +8,7 @@ const saveDoneRecipes = (recipe, date) => {
     name: recipe.strMeal || recipe.strDrink,
     image: recipe.strMealThumb || recipe.strDrinkThumb,
     doneDate: date,
-    tags: recipe.strTags || [],
+    tags: [recipe.strTags] || [],
   };
   const dones = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const NameRecipe = Object.values(object)[1];
