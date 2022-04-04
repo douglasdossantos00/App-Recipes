@@ -84,7 +84,7 @@ function FoodsIdRecipesProgress(props) {
           <h3>Instructions</h3>
           <p data-testid="instructions">{food.meals[0].strInstructions}</p>
           <ButtonFinishRecipe
-            lengthIngredients={ ingredients.length }
+            lengthIngredients={ [ingredients.length, 'meals', id] }
             handleButtonFinish={ () => saveDoneRecipes(food.meals[0], date) }
           />
         </div>) }

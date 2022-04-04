@@ -12,14 +12,9 @@ function DoneRecipes() {
     if (target.name === 'all') {
       return setFilterRecipes();
     }
-    if (target.name === 'food') {
-      const foods = recipes.filter(({ type }) => type === 'food');
-      return setFilterRecipes(foods);
-    }
-    if (target.name === 'drink') {
-      const drinks = recipes.filter(({ type }) => type === 'drink');
-      return setFilterRecipes(drinks);
-    }
+    const recipesFiltred = recipes
+      .filter(({ type }) => type === target.name);
+    return setFilterRecipes(recipesFiltred);
   };
 
   useEffect(() => {
@@ -27,11 +22,10 @@ function DoneRecipes() {
       .parse(localStorage.getItem('doneRecipes'));
     setRecipes(doneRecipes);
   }, []);
-  console.log(recipes);
 
   return (
     <>
-      <Header pageTitle="Done Recipes" />
+      <Header pageTitle="Done Recipes" history={ { push: () => {} } } />
       <button
         data-testid="filter-by-all-btn"
         type="button"
@@ -63,15 +57,9 @@ function DoneRecipes() {
         filter.map((elem, index) => (
           <CardDoneRecipes
             key={ elem.name }
+            recipe={ elem }
             index={ index }
-            src={ elem.image }
-            name={ elem.name }
-            tags={ elem.tags }
-            date={ elem.doneDate }
-            category={ elem.category }
-            nationality={ elem.nationality || elem.alcoholicOrNot }
-            id={ elem.id }
-            page={ elem.type }
+            page={ elem.type === 'food' ? 'foods' : 'drinks' }
           />
 
         ))
