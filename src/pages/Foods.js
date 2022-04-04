@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import ButtonCategory from '../components/ButtonCategory';
 
 function Foods({ history }) {
+  const [numberPage, setNumberPage] = useState(1);
   const { recipesByFilter,
     meals,
     categoriesMeals,
@@ -45,10 +46,23 @@ function Foods({ history }) {
         }
         return true;
       })}
+      <button
+        type="button"
+        onClick={ () => setNumberPage(numberPage - 1) }
+      >
+        {'<'}
+      </button>
+      <button
+        type="button"
+        onClick={ () => setNumberPage(numberPage + 1) }
+      >
+        {'>'}
+      </button>
       <div className="card-foods">
         {foods.map((food, index) => {
           const maxRecipes = 12;
-          if (index < maxRecipes) {
+          if (index < maxRecipes * numberPage
+            && index >= (maxRecipes * (numberPage - 1))) {
             return (
               <Card
                 key={ index }
