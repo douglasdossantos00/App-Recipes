@@ -1,23 +1,23 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './pages/Login';
-import Foods from './pages/Foods';
-import Drinks from './pages/Drinks';
-import Explore from './pages/Explore';
-import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
-import ExploreFoods from './pages/ExploreFoods';
-import ExploreDrinks from './pages/ExploreDrinks';
-import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
-import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
-import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
+import Drinks from './pages/Drinks';
 import DrinksIdRecipes from './pages/DrinksIdRecipes';
-import FoodsIdRecipes from './pages/FoodsIdRecipes';
 import DrinksIdRecipesProgress from './pages/DrinksIDRecipesProgress';
+import Explore from './pages/Explore';
+import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
+import ExploreFoods from './pages/ExploreFoods';
+import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
+import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import Foods from './pages/Foods';
+import FoodsIdRecipes from './pages/FoodsIdRecipes';
 import FoodsIdRecipesProgress from './pages/FoodsIdRecipesProgress';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 function App() {
   return (
