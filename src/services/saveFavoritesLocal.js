@@ -11,6 +11,7 @@ const saveFavorites = (recipe) => {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const NameRecipe = Object.values(object)[0];
   const verify = favorites.find((favorite) => Object.values(favorite)[0] === NameRecipe);
+  object.index = favorites[favorites.length - 1].index + 1 || 0;
   if (!verify) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favorites, object]));
   } else {

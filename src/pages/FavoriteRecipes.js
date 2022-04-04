@@ -67,10 +67,9 @@ function FavoriteRecipes() {
       </button>
       {
 
-        filter.map((elem, index) => (
+        filter.map((elem) => (
           <CardFavoriteRecipes
             key={ elem.name }
-            index={ index }
             src={ elem.image }
             name={ elem.name }
             category={ elem.category }
@@ -78,6 +77,7 @@ function FavoriteRecipes() {
             id={ elem.id }
             page={ elem.type }
             removeFavorite={ removeFavorite }
+            index={ elem.index }
           />
 
         ))

@@ -1,27 +1,30 @@
 .cards img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
- width: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
+
 .cards span {
-  margin-top: 10px;
   color: rgb(85, 76, 76);
+  margin-top: 10px;
 }
+
 .cards {
- text-align: center;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px , rgba(0, 0, 0, 0.09) 0px 4px 2px , rgba(0, 0, 0, 0.09) 0px 8px  , rgba(0, 0, 0, 0.09) 0px 16px  , rgba(0, 0, 0, 0.09) 0px 32px 16px;
   display: flex;
   flex-direction: column;
-  max-width: 160px;
-  padding: 0;
   margin: 0;
   margin-bottom: 5px;
   margin-top: 10px;
+  max-width: 160px;
+  padding: 0;
   padding-bottom: 10px;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  text-align: center;
 }
+
 .recipe-photo {
   margin: 10px;
   max-width: 300px;
@@ -37,15 +40,37 @@
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
 }
+
 .card-foods {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
 body {
+  padding-bottom: 60px;
   width: 360px;
-  margin-bottom: 60px;
-  border-left: black;
+}
+
+.cards-horizontal img {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  width: 148px;
+}
+
+.cards-horizontal span {
+  color: rgb(85, 76, 76);
+  margin-top: 10px;
+}
+
+.cards-horizontal {
+  border-color: rgb(139, 156, 156);
+  border-radius: 10px;
   border-style: solid;
   border-width: 0.5px;
+  display: flex;
+  height: 150px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
