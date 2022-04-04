@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const profileEmail = localStorage.getItem('user');
+    setEmail(profileEmail);
+  }, []);
+
   return (
     <>
       <Header pageTitle="Profile" />
       <div>
         <p data-testid="profile-email">
-          Futuro Email
+          { email }
         </p>
         <button
           type="button"
