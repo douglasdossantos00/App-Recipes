@@ -58,7 +58,12 @@ function DrinksIdRecipesProgress(props) {
           <h2 data-testid="recipe-title">{drink.strDrink}</h2>
 
           <ButtonShare page="drinks" id={ id } testID="share-btn" />
-          <ButtonFavorite url={ url } id={ id } />
+          <ButtonFavorite
+            url={ url }
+            id={ id }
+            testID="favorite-btn"
+            removeFavorite={ () => {} }
+          />
 
           <h5 data-testid="recipe-category">{drink.strCategory}</h5>
           <h3>Ingredients</h3>

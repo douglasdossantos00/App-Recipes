@@ -6,7 +6,7 @@ function DoneRecipes() {
   const [recipes, setRecipes] = useState([]);
   const [filterRecipes, setFilterRecipes] = useState();
 
-  const filter = filterRecipes || recipes;
+  const filter = filterRecipes || recipes || [];
 
   const handleClick = ({ target }) => {
     if (target.name === 'all') {

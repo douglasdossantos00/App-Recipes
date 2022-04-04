@@ -49,7 +49,12 @@ function DrinksIdRecipes(props) {
           <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
 
           <ButtonShare page="drinks" id={ id } testID="share-btn" />
-          <ButtonFavorite url={ url } id={ id } />
+          <ButtonFavorite
+            url={ url }
+            id={ id }
+            testID="favorite-btn"
+            removeFavorite={ () => {} }
+          />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>
           <ul>

@@ -48,7 +48,12 @@ function FoodsIdRecipes(props) {
           />
           <h2 data-testid="recipe-title">{food.meals[0].strMeal}</h2>
           <ButtonShare page="foods" id={ id } testID="share-btn" />
-          <ButtonFavorite url={ url } id={ id } />
+          <ButtonFavorite
+            url={ url }
+            id={ id }
+            testID="favorite-btn"
+            removeFavorite={ () => {} }
+          />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <ul>
