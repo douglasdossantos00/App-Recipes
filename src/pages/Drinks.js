@@ -26,10 +26,8 @@ function Drinks({ history }) {
         type="button"
         data-testid="All-category-filter"
         onClick={ handleClickAllCategories }
-
       >
         All
-
       </button>
       {categories.map((category, index) => {
         const maxCategories = 5;
