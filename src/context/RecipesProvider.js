@@ -10,7 +10,8 @@ function RecipesProvider({ children }) {
   const [drinks, setDrinks] = useState({});
   const [categoriesDrinks, setCategoriesDrinks] = useState({});
   const [categoriesMeals, setCategoriesMeals] = useState({});
-  const [filteredIngredient, setFilteredIngredient] = useState('');
+  const [ingredientsLocalStorage,
+    setIngredientsLocalStorage] = useState([]);
 
   const getRecipes = async () => {
     setMeals(await fetchRecipes('themealdb'));
@@ -38,9 +39,8 @@ function RecipesProvider({ children }) {
         categoriesDrinks,
         categoriesMeals,
         setRecipes,
-        filteredIngredient,
-        setFilteredIngredient,
-      } }
+        ingredientsLocalStorage,
+        setIngredientsLocalStorage } }
     >
       {children}
     </RecipesContext.Provider>

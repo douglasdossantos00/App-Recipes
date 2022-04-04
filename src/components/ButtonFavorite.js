@@ -5,7 +5,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import saveFavorites from '../services/saveFavoritesLocal';
 import fetchFoodById from '../services/fetchFoodById';
 
-function ButtonFavorite({ page, id }) {
+function ButtonFavorite({ url, id }) {
   const [isClicked, setIsClicked] = useState('false');
   const [recipe, setRecipe] = useState({ meals: [{ id: '' }] });
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -18,7 +18,7 @@ function ButtonFavorite({ page, id }) {
   };
   useEffect(() => {
     const getFood = async () => {
-      setRecipe(await fetchFoodById(page, id));
+      setRecipe(await fetchFoodById(url));
     };
     getFood();
     const verify = favorites
@@ -27,7 +27,7 @@ function ButtonFavorite({ page, id }) {
       setIsClicked('true');
     }
     checkLocalStorage();
-  }, [page, id]);
+  }, [url, id]);
 
   const handleClickFavorite = () => {
     const Recipe = recipe.drinks || recipe.meals;
@@ -53,8 +53,9 @@ function ButtonFavorite({ page, id }) {
   );
 }
 ButtonFavorite.propTypes = {
+  url: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
+
 };
 
 export default ButtonFavorite;

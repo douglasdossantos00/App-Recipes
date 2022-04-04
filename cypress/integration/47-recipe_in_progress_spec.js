@@ -119,7 +119,7 @@ describe('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa a
 
     cy.get('[data-testid="0-ingredient-step"]')
       .find('input[type="checkbox"]')
-      .should('have.attr', 'checked');
+       .should('have.attr', 'checked');
   });
 
   it('salva o progresso de uma receita de bebida em andamento', () => {
@@ -137,7 +137,7 @@ describe('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa a
 
     cy.get('[data-testid="0-ingredient-step"]')
       .find('input[type="checkbox"]')
-      .should('have.attr', 'checked');
+        .should('have.attr', 'checked');
   });
 });
 

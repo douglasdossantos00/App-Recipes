@@ -48,10 +48,10 @@ function App() {
           path="/explore/drinks/ingredients"
           component={ ExploreDrinksIngredients }
         />
-        <Route exact path="/drinks/:id" component={ DrinksIdRecipes } />
-        <Route exact path="/foods/:id" component={ FoodsIdRecipes } />
         <Route path="/drinks/:id/in-progress" component={ DrinksIdRecipesProgress } />
         <Route path="/foods/:id/in-progress" component={ FoodsIdRecipesProgress } />
+        <Route exact path="/drinks/:id" component={ DrinksIdRecipes } />
+        <Route exact path="/foods/:id" component={ FoodsIdRecipes } />
       </Switch>
     </div>
 
