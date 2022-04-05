@@ -7,6 +7,7 @@ import CardRecommendation from '../components/CardRecommendation';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
+import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
 function DrinksIdRecipes(props) {
   const [drink, setDrink] = useState({});
@@ -54,6 +55,7 @@ function DrinksIdRecipes(props) {
             id={ id }
             testID="favorite-btn"
             removeFavorite={ () => {} }
+            isFavorite={ checkLocalStorage(id) }
           />
           <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
           <h3>Ingredients</h3>

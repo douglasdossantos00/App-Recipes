@@ -1,28 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { saveFavorites, deleteFavorite } from '../services/LocalStorageFavorites';
+import { saveFavorites, deleteFavorite,
+  checkLocalStorage } from '../services/LocalStorageFavorites';
 import fetchFoodById from '../services/fetchFoodById';
 
-function ButtonFavorite({ url, id, testID, removeFavorite }) {
-  const [isClicked, setIsClicked] = useState(false);
-  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-
-  const checkLocalStorage = () => {
-    const verify = favorites
-      .find((favorite) => favorite.id === id);
-    if (verify) {
-      setIsClicked(true);
-    }
-    return verify;
-  };
-  useEffect(() => {
-    checkLocalStorage();
-  }, []);
+function ButtonFavorite({ url, id, testID, removeFavorite, isFavorite }) {
+  const [isClicked, setIsClicked] = useState(isFavorite);
 
   const handleClickFavorite = async () => {
-    const verify = checkLocalStorage();
+    const verify = checkLocalStorage(id);
     if (!verify) {
       const fetch = await fetchFoodById(url);
       const recipe = fetch[Object.keys(fetch)[0]][0];
@@ -52,6 +40,7 @@ ButtonFavorite.propTypes = {
   id: PropTypes.string.isRequired,
   testID: PropTypes.string.isRequired,
   removeFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 
 };
 

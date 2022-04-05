@@ -18,3 +18,10 @@ export const deleteFavorite = (id) => {
     .filter((item) => item.id !== id);
   localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
 };
+
+export const checkLocalStorage = (id) => {
+  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const verify = favorites
+    .some((favorite) => favorite.id === id);
+  return verify;
+};

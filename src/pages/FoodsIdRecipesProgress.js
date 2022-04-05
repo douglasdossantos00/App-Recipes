@@ -7,6 +7,7 @@ import Checkboxes from '../components/Checkboxes';
 import ButtonShare from '../components/ButtonShare';
 import ButtonFinishRecipe from '../components/ButtonFinishRecipe';
 import saveDoneRecipes from '../services/saveDoneRecipes';
+import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
 function FoodsIdRecipesProgress(props) {
   const [food, setFood] = useState({});
@@ -56,6 +57,7 @@ function FoodsIdRecipesProgress(props) {
             id={ id }
             testID="favorite-btn"
             removeFavorite={ () => {} }
+            isFavorite={ checkLocalStorage(id) }
           />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>

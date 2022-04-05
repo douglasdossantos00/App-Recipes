@@ -4,6 +4,7 @@ import './cards.css';
 import { Link } from 'react-router-dom';
 import ButtonShare from './ButtonShare';
 import ButtonFavorite from './ButtonFavorite';
+import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
 function CardFavoriteRecipes(
   { index,
@@ -40,6 +41,7 @@ function CardFavoriteRecipes(
         url={ url }
         testID={ `${index}-horizontal-favorite-btn` }
         removeFavorite={ removeFavorite }
+        isFavorite={ checkLocalStorage(id) }
       />
     </div>
 
