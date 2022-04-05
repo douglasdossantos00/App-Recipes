@@ -1,25 +1,34 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodById from '../services/fetchFoodById';
 import '../components/cards.css';
 import ButtonFavorite from '../components/ButtonFavorite';
 import Checkboxes from '../components/Checkboxes';
-import RecipesContext from '../context/RecipesContext';
 import ButtonShare from '../components/ButtonShare';
+import ButtonFinishRecipe from '../components/ButtonFinishRecipe';
+import saveDoneRecipes from '../services/saveDoneRecipes';
+import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
 function FoodsIdRecipesProgress(props) {
   const [food, setFood] = useState({});
-  const { ingredientsLocalStorage } = useContext(RecipesContext);
+  const [date, setDate] = useState('');
 
   const { match: { params: { id } } } = props;
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
 
+  const fullDate = () => {
+    const currentDate = new Date();
+    const arrayDate = JSON.stringify(currentDate).split('-').join('T').split('T');
+    const year = currentDate.getFullYear();
+    const dateString = `${arrayDate[2]}/${arrayDate[1]}/${year}`;
+    setDate(dateString);
+  };
   useEffect(() => {
     const getFood = async () => {
       setFood(await fetchFoodById(url));
     };
     getFood();
+    fullDate();
   }, [url]);
 
   const ingredients = food.meals && Object.entries(food.meals[0])
@@ -42,8 +51,14 @@ function FoodsIdRecipesProgress(props) {
             data-testid="recipe-photo"
           />
           <h2 data-testid="recipe-title">{food.meals[0].strMeal}</h2>
-          <ButtonShare page="foods" id={ id } />
-          <ButtonFavorite url={ url } id={ id } />
+          <ButtonShare page="foods" id={ id } testID="share-btn" />
+          <ButtonFavorite
+            url={ url }
+            id={ id }
+            testID="favorite-btn"
+            removeFavorite={ () => {} }
+            isFavorite={ checkLocalStorage(id) }
+          />
           <h5 data-testid="recipe-category">{food.meals[0].strCategory}</h5>
           <h3>Ingredients</h3>
           <div>
@@ -70,16 +85,10 @@ function FoodsIdRecipesProgress(props) {
           </div>
           <h3>Instructions</h3>
           <p data-testid="instructions">{food.meals[0].strInstructions}</p>
-          <Link to="/done-recipes">
-            <button
-              className="start-recipes-footer"
-              type="button"
-              data-testid="finish-recipe-btn"
-              disabled={ ingredients.length !== ingredientsLocalStorage.length }
-            >
-              Finish Recipe
-            </button>
-          </Link>
+          <ButtonFinishRecipe
+            lengthIngredients={ [ingredients.length, 'meals', id] }
+            handleButtonFinish={ () => saveDoneRecipes(food.meals[0], date) }
+          />
         </div>) }
     </div>
   );

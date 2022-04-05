@@ -5,12 +5,12 @@ import './cards.css';
 
 function Card({ page, idRecipe, index, src, name }) {
   return (
-    <Link to={ `/${page}/${idRecipe}` }>
-      <div data-testid={ `${index}-recipe-card` } className="cards">
+    <div data-testid={ `${index}-recipe-card` } className="cards">
+      <Link to={ `/${page}/${idRecipe}` }>
         <img src={ src } alt="card-img" data-testid={ `${index}-card-img` } />
-        <span data-testid={ `${index}-card-name` }>{name}</span>
-      </div>
-    </Link>
+      </Link>
+      <span data-testid={ `${index}-card-name` }>{name}</span>
+    </div>
   );
 }
 Card.propTypes = {

@@ -47,7 +47,6 @@ function Foods({ history }) {
         }
         return true;
       })}
-
       <div className="card-foods">
         {foods.map((food, index) => {
           const maxRecipes = 12;

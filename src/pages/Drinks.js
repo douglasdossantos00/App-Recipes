@@ -42,7 +42,7 @@ function Drinks({ history }) {
         }
         return true;
       })}
-      <div className="card-drinks">
+      <div className="card-foods">
         {cocktails.length > 1 && cocktails.map((drink, index) => {
           const maxRecipes = 12;
           if (index < maxRecipes) {
@@ -58,6 +58,7 @@ function Drinks({ history }) {
           }
           return true;
         })}
+
       </div>
       <Footer />
     </>
