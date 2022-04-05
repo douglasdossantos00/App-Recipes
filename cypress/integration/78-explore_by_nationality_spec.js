@@ -64,7 +64,7 @@ describe('79 - Desenvolva as mesmas especificações da tela de receitas princip
     checkFirstMeals(mealsMock.meals);
   });
 
-  it('Ao selecionar um filtro de nacionalidade, todas as receitas devem mudar para os dados filtrados da API', () => {
+  it.only('Ao selecionar um filtro de nacionalidade, todas as receitas devem mudar para os dados filtrados da API', () => {
     cy.visit('http://localhost:3000/explore/foods/nationalities', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;
