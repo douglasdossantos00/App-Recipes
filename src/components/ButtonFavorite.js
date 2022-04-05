@@ -2,44 +2,38 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import saveFavorites from '../services/saveFavoritesLocal';
+import { saveFavorites, deleteFavorite } from '../services/LocalStorageFavorites';
 import fetchFoodById from '../services/fetchFoodById';
 
 function ButtonFavorite({ url, id, testID, removeFavorite }) {
-  const [isClicked, setIsClicked] = useState('false');
-  const [recipe, setRecipe] = useState({ meals: [{ id: '' }] });
+  const [isClicked, setIsClicked] = useState(false);
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
   const checkLocalStorage = () => {
     const verify = favorites
-      .find((favorite) => Object.values(favorite)[0] === id);
+      .find((favorite) => favorite.id === id);
     if (verify) {
-      setIsClicked('true');
+      setIsClicked(true);
     }
+    return verify;
   };
   useEffect(() => {
-    const getFood = async () => {
-      setRecipe(await fetchFoodById(url));
-    };
-    getFood();
-    const verify = favorites
-      .find((favorite) => Object.values(favorite)[0] === id);
-    if (verify) {
-      setIsClicked('true');
-    }
     checkLocalStorage();
-  }, [url, id]);
+  }, []);
 
-  const handleClickFavorite = () => {
-    const Recipe = recipe.drinks || recipe.meals;
-    saveFavorites(Recipe[0]);
-    removeFavorite();
-    if (isClicked === 'false') {
-      setIsClicked('true');
+  const handleClickFavorite = async () => {
+    const verify = checkLocalStorage();
+    if (!verify) {
+      const fetch = await fetchFoodById(url);
+      const recipe = fetch[Object.keys(fetch)[0]][0];
+      saveFavorites(recipe);
     } else {
-      setIsClicked('false');
+      deleteFavorite(id);
     }
+    removeFavorite();
+    setIsClicked(!isClicked);
   };
-  const icon = isClicked === 'true' ? blackHeartIcon : whiteHeartIcon;
+  const icon = isClicked ? blackHeartIcon : whiteHeartIcon;
   return (
     <button type="button">
       <input

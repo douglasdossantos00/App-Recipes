@@ -13,7 +13,6 @@ const saveDoneRecipes = (recipe, date) => {
     tags: [recipe.strTags] || [],
   };
   const page = object.type === 'food' ? 'meals' : 'cocktails';
-  console.log(page, object.id);
   saveInProgress([], [object.id, page]);
   const dones = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const NameRecipe = Object.values(object)[0];

@@ -6,8 +6,7 @@ function FavoriteRecipes() {
   const [recipes, setRecipes] = useState([]);
   const [filterRecipes, setFilterRecipes] = useState();
 
-  const filter = filterRecipes || recipes || [];
-
+  const FavFilter = filterRecipes || recipes || [];
   const handleClick = ({ target }) => {
     if (target.name === 'all') {
       return setFilterRecipes();
@@ -23,18 +22,16 @@ function FavoriteRecipes() {
   };
 
   const removeFavorite = () => {
-    const favoriteRecipes = JSON
+    const favorites = JSON
       .parse(localStorage.getItem('favoriteRecipes'));
-    setRecipes(favoriteRecipes);
+    setRecipes(favorites);
   };
 
   useEffect(() => {
     const favoriteRecipes = JSON
       .parse(localStorage.getItem('favoriteRecipes'));
     setRecipes(favoriteRecipes);
-    console.log(favoriteRecipes);
   }, []);
-  console.log(recipes);
 
   return (
     <>
@@ -66,8 +63,7 @@ function FavoriteRecipes() {
         Drinks
       </button>
       {
-
-        filter.map((elem) => (
+        FavFilter.map((elem, index) => (
           <CardFavoriteRecipes
             key={ elem.name }
             src={ elem.image }
@@ -77,7 +73,7 @@ function FavoriteRecipes() {
             id={ elem.id }
             page={ elem.type }
             removeFavorite={ removeFavorite }
-            index={ elem.index }
+            index={ index }
           />
 
         ))
