@@ -21,7 +21,7 @@ function CardFavoriteRecipes(
   const url = `https://www.${typeRecipes}.com/api/json/v1/1/lookup.php?i=${id}`;
 
   return (
-    <div data-testid={ `${index}-recipe-card` } className="cards-horizontal">
+    <div data-testid={ `${index}-recipe-card` } className="cards">
       <Link to={ `/${page}s/${id}` }>
         <img src={ src } alt="card-img" data-testid={ `${index}-horizontal-image` } />
         <span data-testid={ `${index}-horizontal-top-text` }>
