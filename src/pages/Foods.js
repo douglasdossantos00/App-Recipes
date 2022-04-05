@@ -13,7 +13,9 @@ function Foods({ history }) {
   const { recipesByFilter,
     meals,
     categoriesMeals,
-    setRecipes } = useContext(RecipesContext);
+    setRecipes,
+    filteredIngredient,
+  } = useContext(RecipesContext);
 
   const foods = recipesByFilter.meals || meals.meals || [];
   const categories = categoriesMeals.meals || [];
@@ -23,16 +25,16 @@ function Foods({ history }) {
   };
   return (
     <>
+      <p>{ filteredIngredient }</p>
       <Header pageTitle="Foods" history={ history } />
       <button
         type="button"
         data-testid="All-category-filter"
         onClick={ handleClickAllCategories }
-
       >
         All
-
       </button>
+
       {categories.map((category, index) => {
         const maxCategories = 5;
         if (index < maxCategories) {
@@ -46,18 +48,6 @@ function Foods({ history }) {
         }
         return true;
       })}
-      <button
-        type="button"
-        onClick={ () => setNumberPage(numberPage - 1) }
-      >
-        {'<'}
-      </button>
-      <button
-        type="button"
-        onClick={ () => setNumberPage(numberPage + 1) }
-      >
-        {'>'}
-      </button>
       <div className="card-foods">
         {foods.map((food, index) => {
           const maxRecipes = 12;
@@ -71,7 +61,8 @@ function Foods({ history }) {
                 src={ food.strMealThumb }
                 page="foods"
                 idRecipe={ food.idMeal }
-              />);
+              />
+            );
           }
           return true;
         })}
