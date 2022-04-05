@@ -16,7 +16,6 @@ function ExploreFoodsNationalities() {
       const url = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
       const fetch = await fetchNationalities(url);
       setNationalities(fetch);
-      // setRecipes(meals);
     };
     getNationalities();
   }, [meals]);
@@ -26,8 +25,7 @@ function ExploreFoodsNationalities() {
   const handleChangeNationalities = async ({ target }) => {
     if (target.value === 'all') {
       const fetch = await fetchRecipes('themealdb');
-      console.log(fetch, meals);
-      setRecipes(fetch);
+      return setRecipes(fetch);
     }
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${target.value}`;
     const fetch = await fetchRecipesByNationalities(url);

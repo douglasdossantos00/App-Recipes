@@ -18,6 +18,7 @@ import FoodsIdRecipes from './pages/FoodsIdRecipes';
 import FoodsIdRecipesProgress from './pages/FoodsIdRecipesProgress';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/foods/:id/in-progress" component={ FoodsIdRecipesProgress } />
         <Route exact path="/drinks/:id" component={ DrinksIdRecipes } />
         <Route exact path="/foods/:id" component={ FoodsIdRecipes } />
+        <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
       </Switch>
     </div>
 
