@@ -1,8 +1,8 @@
 body {
   align-self: auto;
+  background-color: rgba(255, 255, 255, 0.7);
   margin: auto;
   width: 360px;
-  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-login {
