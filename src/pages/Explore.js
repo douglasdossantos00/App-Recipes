@@ -13,7 +13,7 @@ function Explore({ history }) {
     }
   };
   return (
-    <>
+    <div className="bg-white">
       <Header pageTitle="Explore" />
       <button
         data-testid="explore-foods"
@@ -28,11 +28,12 @@ function Explore({ history }) {
         id="explore-drinks"
         type="button"
         onClick={ handleClick }
+        className="btn btn-primary"
       >
         Explore Drinks
       </button>
       <Footer />
-    </>
+    </div>
   );
 }
 

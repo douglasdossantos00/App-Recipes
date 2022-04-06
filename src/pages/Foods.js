@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import RecipesContext from '../context/RecipesContext';
+import React, { useContext } from 'react';
+import ButtonCategory from '../components/ButtonCategory';
 import Card from '../components/Card';
 import '../components/cards.css';
 import Footer from '../components/Footer';
-
-import ButtonCategory from '../components/ButtonCategory';
+import Header from '../components/Header';
+import RecipesContext from '../context/RecipesContext';
 
 function Foods({ history }) {
   const { recipesByFilter,
@@ -23,7 +22,7 @@ function Foods({ history }) {
     setRecipes({});
   };
   return (
-    <>
+    <div className="foods bg-white">
       <p>{ filteredIngredient }</p>
       <Header pageTitle="Foods" history={ history } />
       <button
@@ -66,7 +65,7 @@ function Foods({ history }) {
         })}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
