@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 function ButtonShare({ page, id, testID }) {
@@ -11,8 +11,11 @@ function ButtonShare({ page, id, testID }) {
   };
 
   return (
-    <div>
-      <button type="button">
+    <div className="">
+      <button
+        type="button"
+        // className="absolute"
+      >
         <input
           type="image"
           src={ shareIcon }
@@ -21,7 +24,16 @@ function ButtonShare({ page, id, testID }) {
           onClick={ handleClickShare }
         />
       </button>
-      {isShare && <span>Link copied!</span>}
+      <div>
+        { isShare && (
+          <p
+            className="text-xs px-2"
+          >
+            Link copied!
+          </p>
+        ) }
+      </div>
+
     </div>
   );
 }

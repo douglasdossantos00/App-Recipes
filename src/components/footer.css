@@ -1,6 +1,5 @@
 .footer-container {
-  background-color: azure;
-  border: 1px solid black;
+  background-color: rgb(115, 70, 213, 0.3);
   bottom: 0;
   display: flex;
   justify-content: space-around;

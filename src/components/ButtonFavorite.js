@@ -27,6 +27,7 @@ function ButtonFavorite({ url, id, testID, removeFavorite, isFavorite }) {
       <input
         type="image"
         alt="button-favorite"
+        className="mx-2"
         data-testid={ testID }
         src={ icon }
         onClick={ handleClickFavorite }

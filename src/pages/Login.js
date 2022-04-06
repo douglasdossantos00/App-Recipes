@@ -37,7 +37,7 @@ function Login({ history }) {
       className="
       form-login flex flex-col min-h-screen justify-center items-center"
     >
-      <img src={ logo } alt="logo" className="w-56 mb-20" />
+      <img src={ logo } alt="logo" className="w-56 mb-16" />
       <label
         htmlFor="email"
         className="label-text flex flex-col font-bold text-lg font-serif"

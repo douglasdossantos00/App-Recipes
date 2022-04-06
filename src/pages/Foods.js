@@ -22,47 +22,53 @@ function Foods({ history }) {
     setRecipes({});
   };
   return (
-    <div className="foods bg-white">
+    <div className="foods bg-white font-sans">
       <p>{ filteredIngredient }</p>
       <Header pageTitle="Foods" history={ history } />
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ handleClickAllCategories }
-      >
-        All
-      </button>
+      <div className="pt-20">
+        <div className="">
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ handleClickAllCategories }
+            className="btn"
+          >
+            All
+          </button>
 
-      {categories.map((category, index) => {
-        const maxCategories = 5;
-        if (index < maxCategories) {
-          return (
-            <ButtonCategory
-              category={ category.strCategory }
-              page="themealdb"
-              id={ category.strCategory }
-            />
-          );
-        }
-        return true;
-      })}
-      <div className="card-foods">
-        {foods.map((food, index) => {
-          const maxRecipes = 12;
-          if (index < maxRecipes) {
-            return (
-              <Card
-                key={ index }
-                index={ index }
-                name={ food.strMeal }
-                src={ food.strMealThumb }
-                page="foods"
-                idRecipe={ food.idMeal }
-              />
-            );
-          }
-          return true;
-        })}
+          {categories.map((category, index) => {
+            const maxCategories = 5;
+            if (index < maxCategories) {
+              return (
+                <ButtonCategory
+                  category={ category.strCategory }
+                  page="themealdb"
+                  id={ category.strCategory }
+                />
+              );
+            }
+            return true;
+          })}
+        </div>
+
+        <div className="card-foods flex flex-wrap justify-evenly overflow-y-auto">
+          {foods.map((food, index) => {
+            const maxRecipes = 12;
+            if (index < maxRecipes) {
+              return (
+                <Card
+                  key={ index }
+                  index={ index }
+                  name={ food.strMeal }
+                  src={ food.strMealThumb }
+                  page="foods"
+                  idRecipe={ food.idMeal }
+                />
+              );
+            }
+            return true;
+          }) }
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './header.css';
 import fetchRecipesByFilter from '../services/fetchRecipesByFilter';
+import './header.css';
 
 function Header({ pageTitle, history }) {
   const [input, setInput] = useState('false');
@@ -26,8 +26,8 @@ function Header({ pageTitle, history }) {
   };
 
   return (
-    <header className="header-container">
-      <div className="header-icons">
+    <header className="header-container z-10">
+      <div className="header-icons navbar">
         <Link to="/profile">
           <button type="button">
             <img
@@ -37,7 +37,11 @@ function Header({ pageTitle, history }) {
             />
           </button>
         </Link>
-        <h1 data-testid="page-title">{ pageTitle }</h1>
+        <h1
+          data-testid="page-title"
+        >
+          { pageTitle }
+        </h1>
         {
           (pageTitle === 'Foods' || pageTitle === 'Explore Nationalities'
 || pageTitle === 'Drinks')
@@ -58,22 +62,23 @@ function Header({ pageTitle, history }) {
         {
           input === 'true'
 && (
-  <div>
-
+  <div className="flex flex-col bg-white justify-evenly">
     <input
       data-testid="search-input"
       type="text"
       placeholder="search recipe"
+      className="input input-bordered m-2"
       onChange={ ({ target }) => {
         setValue(target.value);
       } }
     />
-    <div className="header-radio">
+    <div className="header-radio flex justify-evenly text-lg">
       <label htmlFor="ingredient">
         <input
           data-testid="ingredient-search-radio"
           type="radio"
           name="ingredient"
+          className="radio radio-primary w-4 h-4 mx-1.5"
           onClick={ handleRadio }
         />
         Ingredient
@@ -82,6 +87,7 @@ function Header({ pageTitle, history }) {
         <input
           data-testid="name-search-radio"
           type="radio"
+          className="radio radio-primary w-4 h-4 mx-1.5"
           name="name"
           onClick={ handleRadio }
         />
@@ -92,16 +98,18 @@ function Header({ pageTitle, history }) {
           data-testid="first-letter-search-radio"
           type="radio"
           name="first-letter"
+          className="radio radio-primary w-4 h-4 mx-1.5"
           onClick={ handleRadio }
         />
         First Letter
       </label>
 
     </div>
-    <div>
+    <div className=" flex justify-center">
       <button
         type="button"
         data-testid="exec-search-btn"
+        className="btn btn-sm"
         onClick={ async () => {
           if (filter === 'first-letter' && value.length > 1) {
             global.alert('Your search must have only 1 (one) character');
