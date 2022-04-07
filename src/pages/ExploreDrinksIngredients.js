@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import RecipesContext from '../context/RecipesContext';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import fetchIngredientsDrinks from '../services/fetchIngredientsDrinks';
+import RecipesContext from '../context/RecipesContext';
 import fetchDrinksByIngredients from '../services/fetchDrinksByIngredient';
+import fetchIngredientsDrinks from '../services/fetchIngredientsDrinks';
 
 function ExploreDrinksIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -32,29 +32,36 @@ function ExploreDrinksIngredients() {
   };
 
   return (
-    <>
+    <div className="font-sans bg-white">
       <Header pageTitle="Explore Ingredients" />
-      { ingredients.map((item, index) => (
-        <Link
-          to="/drinks"
-          key={ index }
-          onClick={ () => sendingIngredient({ item }) }
-        >
-          <div
-            data-testid={ `${index}-ingredient-card` }
-            className="cards"
-          >
-            <img
-              src={ `https://www.thecocktaildb.com/images/ingredients/${item}-Small.png` }
-              alt="card-img"
-              data-testid={ `${index}-card-img` }
-            />
-            <span data-testid={ `${index}-card-name` }>{item}</span>
-          </div>
-        </Link>
-      ))}
+      <div
+        className="pt-16"
+      >
+        <div className="card-ingredients flex flex-wrap justify-evenly overflow-y-auto">
+          { ingredients.map((item, index) => (
+            <Link
+              to="/drinks"
+              key={ index }
+              onClick={ () => sendingIngredient({ item }) }
+            >
+              <div
+                data-testid={ `${index}-ingredient-card` }
+                className="cards
+                card sm:card-side bg-base-100 w-36 my-4 shadow-xl items-center z-0"
+              >
+                <img
+                  src={ `https://www.thecocktaildb.com/images/ingredients/${item}-Small.png` }
+                  alt="card-img"
+                  data-testid={ `${index}-card-img` }
+                />
+                <span data-testid={ `${index}-card-name` }>{item}</span>
+              </div>
+            </Link>
+          )) }
+        </div>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

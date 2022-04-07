@@ -32,13 +32,12 @@ function ExploreFoodsIngredients() {
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans bg-white">
       <Header pageTitle="Explore Ingredients" />
       <div
-        className="card-ingredients
-      flex pt-20 flex-wrap justify-evenly overflow-y-auto"
+        className="pt-16"
       >
-        <div className="">
+        <div className="card-ingredients flex flex-wrap justify-evenly overflow-y-auto">
           { ingredients.map((item, index) => (
             <Link
               to="/foods"
@@ -48,7 +47,7 @@ function ExploreFoodsIngredients() {
               <div
                 data-testid={ `${index}-ingredient-card` }
                 className="cards
-            card sm:card-side bg-base-100 w-36 mx-2 my-4 shadow-xl items-center z-0"
+            card sm:card-side bg-base-100 w-36 my-4 shadow-xl items-center z-0"
               >
                 <img
                   src={ `https://www.themealdb.com/images/ingredients/${item}-Small.png` }
@@ -67,5 +66,3 @@ function ExploreFoodsIngredients() {
   );
 }
 export default ExploreFoodsIngredients;
-
-// //https://www.themealdb.com/api/json/v1/1/filter.php?i=${item}

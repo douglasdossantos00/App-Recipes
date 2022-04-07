@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import saveInProgress from '../services/saveInProgressRecipes';
+import React, { useContext, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
+import saveInProgress from '../services/saveInProgressRecipes';
 
 function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
   const [isClicked, setIsClicked] = useState(checked);
@@ -32,6 +32,7 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
       key={ ingredient }
       htmlFor={ ingredient }
       data-testid={ `${index}-ingredient-step` }
+      className={ isClicked && 'line-through' }
     >
 
       <input
@@ -39,10 +40,11 @@ function Checkboxes({ index, ingredient, measure, page, idRecipe, checked }) {
         type="checkbox"
         name="ingredient"
         checked={ isClicked }
+        className="mx-2"
         onChange={ handleClickIngredient }
       />
-      {measure}
-      {ingredient}
+      {`${measure} 
+      ${ingredient}`}
     </label>
   );
 }
