@@ -22,27 +22,31 @@ function ExploreDrinks({ history }) {
     }
   };
   return (
-    <>
+    <div className="bg-white div-explore flex font-sans justify-center">
       <Header pageTitle="Explore Drinks" />
-      <button
-        data-testid="explore-by-ingredient"
-        id="explore-by-ingredient"
-        type="button"
-        onClick={ handleClick }
-      >
-        By Ingredient
-      </button>
-      <Link to={ `/drinks/${drinkId}` }>
+      <div className="pt-20 flex flex-col items-center justify-center">
         <button
-          data-testid="explore-surprise"
-          id="explore-surprise"
+          data-testid="explore-by-ingredient"
+          id="explore-by-ingredient"
           type="button"
+          className=" btn btn-explore my-4"
+          onClick={ handleClick }
         >
-          Surprise me!
+          By Ingredient
         </button>
-      </Link>
+        <Link to={ `/drinks/${drinkId}` }>
+          <button
+            data-testid="explore-surprise"
+            id="explore-surprise"
+            type="button"
+            className=" btn btn-explore my-4"
+          >
+            Surprise me!
+          </button>
+        </Link>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

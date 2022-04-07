@@ -13,25 +13,28 @@ function Explore({ history }) {
     }
   };
   return (
-    <div className="bg-white">
+    <div className="bg-white div-explore font-sans flex justify-center">
       <Header pageTitle="Explore" />
-      <button
-        data-testid="explore-foods"
-        id="explore-foods"
-        type="button"
-        onClick={ handleClick }
-      >
-        Explore Foods
-      </button>
-      <button
-        data-testid="explore-drinks"
-        id="explore-drinks"
-        type="button"
-        onClick={ handleClick }
-        className="btn btn-primary"
-      >
-        Explore Drinks
-      </button>
+      <div className="pt-20 flex flex-col justify-center items-center">
+        <button
+          data-testid="explore-foods"
+          id="explore-foods"
+          type="button"
+          onClick={ handleClick }
+          className=" btn btn-explore my-4"
+        >
+          Explore Foods
+        </button>
+        <button
+          data-testid="explore-drinks"
+          id="explore-drinks"
+          type="button"
+          onClick={ handleClick }
+          className="btn btn-explore"
+        >
+          Explore Drinks
+        </button>
+      </div>
       <Footer />
     </div>
   );

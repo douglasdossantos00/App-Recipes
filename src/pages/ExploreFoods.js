@@ -26,35 +26,40 @@ function ExploreFoods({ history }) {
   };
 
   return (
-    <>
+    <div className="bg-white div-explore flex justify-center font-sans">
       <Header pageTitle="Explore Foods" />
-      <button
-        data-testid="explore-by-ingredient"
-        id="explore-by-ingredient"
-        type="button"
-        onClick={ handleClick }
-      >
-        By Ingredient
-      </button>
-      <button
-        data-testid="explore-by-nationality"
-        id="explore-by-nationality"
-        type="button"
-        onClick={ handleClick }
-      >
-        By Nationality
-      </button>
-      <Link to={ `/foods/${mealId}` }>
+      <div className="pt-20 flex flex-col items-center justify-center">
         <button
-          data-testid="explore-surprise"
-          id="explore-surprise"
+          data-testid="explore-by-ingredient"
+          id="explore-by-ingredient"
           type="button"
+          className=" btn btn-explore my-4"
+          onClick={ handleClick }
         >
-          Surprise me!
+          By Ingredient
         </button>
-      </Link>
+        <button
+          data-testid="explore-by-nationality"
+          id="explore-by-nationality"
+          type="button"
+          onClick={ handleClick }
+          className=" btn btn-explore my-4"
+        >
+          By Nationality
+        </button>
+        <Link to={ `/foods/${mealId}` }>
+          <button
+            data-testid="explore-surprise"
+            id="explore-surprise"
+            type="button"
+            className=" btn btn-explore my-4"
+          >
+            Surprise me!
+          </button>
+        </Link>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

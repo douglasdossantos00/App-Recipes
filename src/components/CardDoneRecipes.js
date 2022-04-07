@@ -1,17 +1,22 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import './cards.css';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ButtonShare from './ButtonShare';
+import './cards.css';
 
 function CardDoneRecipes({ recipe, index, page }) {
   return (
-    <div data-testid={ `${index}-recipe-card` } className="cards">
+    <div
+      data-testid={ `${index}-recipe-card` }
+      className="cards
+      card sm:card-side bg-base-100 w-36 mx-2 my-4 h-52 shadow-xl items-center z-0"
+    >
       <Link to={ `/${page}/${recipe.id}` }>
         <img
           src={ recipe.image }
           alt="card-img"
           data-testid={ `${index}-horizontal-image` }
+          className="mt-0"
         />
 
         <span data-testid={ `${index}-horizontal-top-text` }>

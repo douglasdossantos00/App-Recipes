@@ -8,7 +8,7 @@ function Card({ page, idRecipe, index, src, name }) {
     <div
       data-testid={ `${index}-recipe-card` }
       className="cards
-      card sm:card-side bg-base-100 w-36 mx-2 my-4 h-52 shadow-xl items-center z-0"
+      card sm:card-side bg-base-100 w-36 mx-2 my-4 shadow-xl items-center z-0"
     >
       <Link to={ `/${page}/${idRecipe}` }>
         <figure className="m-0">

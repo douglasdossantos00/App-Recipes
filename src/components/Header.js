@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../images/profileIcon.png';
+import searchIcon from '../images/searchIcon.png';
 import fetchRecipesByFilter from '../services/fetchRecipesByFilter';
 import './header.css';
 
@@ -27,18 +27,20 @@ function Header({ pageTitle, history }) {
 
   return (
     <header className="header-container z-10">
-      <div className="header-icons navbar">
+      <div className="header-icons flex ">
         <Link to="/profile">
           <button type="button">
             <img
               src={ profileIcon }
               alt="profile"
               data-testid="profile-top-btn"
+              className="w-8"
             />
           </button>
         </Link>
         <h1
           data-testid="page-title"
+          className="text-3xl"
         >
           { pageTitle }
         </h1>
@@ -54,6 +56,7 @@ function Header({ pageTitle, history }) {
       src={ searchIcon }
       alt="profile"
       data-testid="search-top-btn"
+      className="w-8"
     />
   </button>)
         }

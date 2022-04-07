@@ -14,7 +14,6 @@ function ButtonShare({ page, id, testID }) {
     <div className="">
       <button
         type="button"
-        // className="absolute"
       >
         <input
           type="image"

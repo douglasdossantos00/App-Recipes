@@ -3,7 +3,7 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   margin: auto;
   width: 360px;
-  height: 800px;
+  height: 640px;
 }
 
 .btn {
@@ -12,6 +12,14 @@ body {
   font-size: 15px;
   margin: 5px;
   width: 110px;
+}
+
+.btn-explore {
+  border-color: #4506cb;
+  color: #4506cb;
+  font-size: 15px;
+  margin: 5px;
+  width: 210px;
 }
 
 .btn-login {
@@ -30,9 +38,17 @@ body {
   color: white;
 }
 
+/* .btn-return {
+} */
+
 .details-recipe {
   height: 640px;
 }
+
+.div-explore {
+  height: 640px;
+}
+
 /*
 #iceLeft {
   animation: clink .8s infinite ease;

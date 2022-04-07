@@ -6,6 +6,8 @@ import ButtonShare from '../components/ButtonShare';
 import CardRecommendation from '../components/CardRecommendation';
 import '../components/cards.css';
 import RecipesContext from '../context/RecipesContext';
+import evenlyIcon from '../images/evenlyIcon.svg';
+import returnIcon from '../images/returnIcon.png';
 import fetchFoodById from '../services/fetchFoodById';
 import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
@@ -38,9 +40,25 @@ function FoodsIdRecipes(props) {
     .map((measure) => measure[1]);
 
   return (
-    <div className="details-recipe overflow-y-auto px-4 bg-white font-sans">
+    <div className="details-recipe overflow-y-auto bg-white font-sans">
+      <header className="header-bar flex justify-between mx-3 items-center">
+        <Link to="/foods">
+          <button type="button">
+            <img
+              src={ returnIcon }
+              alt="btn-return"
+              className="btn-return w-8"
+            />
+          </button>
+        </Link>
+        <img
+          src={ evenlyIcon }
+          alt="logo"
+          className="w-12"
+        />
+      </header>
       { food.meals && (
-        <div>
+        <div className="px-4">
           <img
             className="recipe-photo w-full rounded-xl mt-2"
             src={ food.meals[0].strMealThumb }
@@ -53,7 +71,6 @@ function FoodsIdRecipes(props) {
               data-testid="recipe-title"
             >
               { food.meals[0].strMeal }
-
             </h2>
 
             <div className="flex w-1/4 justify-evenly items-start">
@@ -120,7 +137,7 @@ function FoodsIdRecipes(props) {
           </section>
           <Link to={ `/foods/${id}/in-progress` }>
             <button
-              className="start-recipes-footer"
+              className="start-recipes-footer rounded"
               type="button"
               data-testid="start-recipe-btn"
             >

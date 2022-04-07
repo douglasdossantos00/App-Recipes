@@ -25,7 +25,18 @@ function DoneRecipes() {
 
   return (
     <>
-      <Header pageTitle="Done Recipes" history={ { push: () => {} } } />
+      <div className="flex flex-row">
+        <Header pageTitle="Done Recipes" history={ { push: () => { } } } />
+        {/* <Link to="/foods">
+          <button type="button">
+            <img
+              src={ returnIcon }
+              alt="btn-return"
+              className="btn-return w-8"
+            />
+          </button>
+        </Link> */}
+      </div>
       <button
         data-testid="filter-by-all-btn"
         type="button"

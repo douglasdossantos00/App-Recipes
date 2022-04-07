@@ -11,6 +11,10 @@
   height: 445px;
 }
 
+.card-ingredients {
+  height: 640px;
+}
+
 .card-recomendation {
   color: #29194D;
 }

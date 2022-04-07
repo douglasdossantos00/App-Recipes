@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import RecipesContext from '../context/RecipesContext';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import fetchIngredientsFoods from '../services/fetchIngredientsFoods';
+import RecipesContext from '../context/RecipesContext';
 import fetchFoodsByIngredients from '../services/fetchFoodsByIngredients';
+import fetchIngredientsFoods from '../services/fetchIngredientsFoods';
 
 function ExploreFoodsIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -32,29 +32,38 @@ function ExploreFoodsIngredients() {
   };
 
   return (
-    <>
+    <div className="font-sans">
       <Header pageTitle="Explore Ingredients" />
-      { ingredients.map((item, index) => (
-        <Link
-          to="/foods"
-          key={ index }
-          onClick={ () => sendingIngredient({ item }) }
-        >
-          <div
-            data-testid={ `${index}-ingredient-card` }
-            className="cards"
-          >
-            <img
-              src={ `https://www.themealdb.com/images/ingredients/${item}-Small.png` }
-              alt="card-img"
-              data-testid={ `${index}-card-img` }
-            />
-            <span data-testid={ `${index}-card-name` }>{item}</span>
-          </div>
-        </Link>
-      ))}
+      <div
+        className="card-ingredients
+      flex pt-20 flex-wrap justify-evenly overflow-y-auto"
+      >
+        <div className="">
+          { ingredients.map((item, index) => (
+            <Link
+              to="/foods"
+              key={ index }
+              onClick={ () => sendingIngredient({ item }) }
+            >
+              <div
+                data-testid={ `${index}-ingredient-card` }
+                className="cards
+            card sm:card-side bg-base-100 w-36 mx-2 my-4 shadow-xl items-center z-0"
+              >
+                <img
+                  src={ `https://www.themealdb.com/images/ingredients/${item}-Small.png` }
+                  alt="card-img"
+                  data-testid={ `${index}-card-img` }
+                />
+                <span data-testid={ `${index}-card-name` }>{item}</span>
+              </div>
+            </Link>
+          )) }
+        </div>
+
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 export default ExploreFoodsIngredients;
