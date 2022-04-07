@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
+import React, { useContext } from 'react';
+import ButtonCategory from '../components/ButtonCategory';
 import Card from '../components/Card';
-import RecipesContext from '../context/RecipesContext';
 import '../components/cards.css';
 import Footer from '../components/Footer';
-import ButtonCategory from '../components/ButtonCategory';
+import Header from '../components/Header';
+import RecipesContext from '../context/RecipesContext';
 
 function Drinks({ history }) {
   const { recipesByFilter,
@@ -19,49 +19,58 @@ function Drinks({ history }) {
   const handleClickAllCategories = () => {
     setRecipes({});
   };
-  return (
-    <>
-      <Header pageTitle="Drinks" history={ history } />
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ handleClickAllCategories }
-      >
-        All
-      </button>
-      {categories.map((category, index) => {
-        const maxCategories = 5;
-        if (index < maxCategories) {
-          return (
-            <ButtonCategory
-              category={ category.strCategory }
-              page="thecocktaildb"
-              id={ category.strCategory }
-            />
-          );
-        }
-        return true;
-      })}
-      <div className="card-foods">
-        {cocktails.length > 1 && cocktails.map((drink, index) => {
-          const maxRecipes = 12;
-          if (index < maxRecipes) {
-            return (
-              <Card
-                key={ index }
-                index={ index }
-                name={ drink.strDrink }
-                src={ drink.strDrinkThumb }
-                page="drinks"
-                idRecipe={ drink.idDrink }
-              />);
-          }
-          return true;
-        })}
 
+  return (
+    <div className="drinks bg-white font-sans">
+      <Header pageTitle="Drinks" history={ history } />
+      <div className="pt-20">
+        <div className="">
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ handleClickAllCategories }
+            className="btn"
+          >
+            All
+          </button>
+          {categories.map((category, index) => {
+            const maxCategories = 5;
+            if (index < maxCategories) {
+              return (
+                <ButtonCategory
+                  category={ category.strCategory }
+                  page="thecocktaildb"
+                  id={ category.strCategory }
+                />
+              );
+            }
+            return true;
+          }) }
+        </div>
+        <div
+          className="card-foods
+         flex flex-wrap justify-evenly overflow-y-auto text-xs"
+        >
+          {cocktails.length > 1 && cocktails.map((drink, index) => {
+            const maxRecipes = 12;
+            if (index < maxRecipes) {
+              return (
+                <Card
+                  key={ index }
+                  index={ index }
+                  name={ drink.strDrink }
+                  src={ drink.strDrinkThumb }
+                  page="drinks"
+                  idRecipe={ drink.idDrink }
+                />);
+            }
+            return true;
+          })}
+
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 Drinks.propTypes = {

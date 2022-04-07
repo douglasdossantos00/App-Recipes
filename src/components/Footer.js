@@ -7,7 +7,7 @@ import './footer.css';
 
 function Footer() {
   return (
-    <footer className="footer-container" data-testid="footer">
+    <footer className="footer-container rounded pt-2" data-testid="footer">
       <Link to="/drinks">
         <button type="button">
           <img
@@ -32,6 +32,7 @@ function Footer() {
             src={ mealIcon }
             alt="mealsIcon"
             data-testid="food-bottom-btn"
+            className="fill-current text-white"
           />
         </button>
       </Link>

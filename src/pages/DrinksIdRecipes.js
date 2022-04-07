@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import fetchFoodById from '../services/fetchFoodById';
-import RecipesContext from '../context/RecipesContext';
-import CardRecommendation from '../components/CardRecommendation';
-import '../components/cards.css';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
+import CardRecommendation from '../components/CardRecommendation';
+import '../components/cards.css';
+import evenlyIcon from '../images/evenlyIcon.svg';
+import returnIcon from '../images/returnIcon.png';
+import RecipesContext from '../context/RecipesContext';
+import fetchFoodById from '../services/fetchFoodById';
 import { checkLocalStorage } from '../services/LocalStorageFavorites';
 
 function DrinksIdRecipes(props) {
@@ -38,26 +40,51 @@ function DrinksIdRecipes(props) {
     .map((measure) => measure[1]);
 
   return (
-    <div>
+    <div className="details-recipe overflow-y-auto bg-white font-sans">
+      <header className="header-bar flex justify-between mx-3 items-center">
+        <Link to="/drinks">
+          <button type="button">
+            <img
+              src={ returnIcon }
+              alt="btn-return"
+              className="btn-return w-8"
+            />
+          </button>
+        </Link>
+        <img
+          src={ evenlyIcon }
+          alt="logo"
+          className="w-12"
+        />
+      </header>
       { drink.drinks && (
-        <div>
+        <div className="px-4">
           <img
-            className="recipe-photo"
+            className="recipe-photo w-full rounded-xl mt-2"
             src={ drink.drinks[0].strDrinkThumb }
             alt="recipe"
             data-testid="recipe-photo"
           />
-          <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
+          <div className="flex mt-2 justify-between">
+            <h2 data-testid="recipe-title">{drink.drinks[0].strDrink}</h2>
 
-          <ButtonShare page="drinks" id={ id } testID="share-btn" />
-          <ButtonFavorite
-            url={ url }
-            id={ id }
-            testID="favorite-btn"
-            removeFavorite={ () => {} }
-            isFavorite={ checkLocalStorage(id) }
-          />
-          <h5 data-testid="recipe-category">{drink.drinks[0].strAlcoholic}</h5>
+            <div className="flex w-1/4 justify-evenly items-start">
+              <ButtonShare page="drinks" id={ id } testID="share-btn" />
+              <ButtonFavorite
+                url={ url }
+                id={ id }
+                testID="favorite-btn"
+                removeFavorite={ () => {} }
+                isFavorite={ checkLocalStorage(id) }
+              />
+            </div>
+          </div>
+          <h5
+            data-testid="recipe-category"
+            className="mt-2.5"
+          >
+            { drink.drinks[0].strAlcoholic }
+          </h5>
           <h3>Ingredients</h3>
           <ul>
             {ingredients.map((ingredient, index) => (
@@ -70,7 +97,12 @@ function DrinksIdRecipes(props) {
               </li>))}
           </ul>
           <h3>Instructions</h3>
-          <p data-testid="instructions">{drink.drinks[0].strInstructions}</p>
+          <p
+            data-testid="instructions"
+            className="text-justify instructions"
+          >
+            { drink.drinks[0].strInstructions }
+          </p>
           <h3>Recommended</h3>
           <section className="card-recommendation-container">
             {meals.meals && meals.meals.map((meal, index) => {
@@ -92,7 +124,7 @@ function DrinksIdRecipes(props) {
           </section>
           <Link to={ `/drinks/${id}/in-progress` }>
             <button
-              className="start-recipes-footer"
+              className="start-recipes-footer rounded"
               type="button"
               data-testid="start-recipe-btn"
             >

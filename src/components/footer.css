@@ -1,25 +1,27 @@
 .footer-container {
-  background-color: azure;
-  border: 1px solid black;
+  background-color: rgb(115, 70, 213, 0.3);
   bottom: 0;
   display: flex;
   justify-content: space-around;
-  left: 0;
   position: fixed;
-  width: 100%;
+  width: 360px;
 }
 
 .start-recipes-footer {
   align-items: center;
-  background-color: green;
-  border: 1px solid black;
+  background-color: #4406cbd8;
+  color: #fff;
+  border-radius: 4px;
   bottom: 0;
   display: flex;
   font-size: 20px;
-  height: 50px;
+  height: 57px;
   justify-content: space-around;
-  left: 0;
-  margin: 10px;
   position: fixed;
-  width: 100%;
+  width: 360px;
+  margin-left: -24.5px;
+}
+
+.start-recipes-footer:hover {
+  background-color: rgb(115, 70, 213);
 }

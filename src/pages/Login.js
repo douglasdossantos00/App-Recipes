@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import logo from '../images/logo.png';
 
 function Login({ history }) {
   const [newInputEmail, setInputEmail] = useState('');
@@ -32,8 +33,15 @@ function Login({ history }) {
   };
 
   return (
-    <form>
-      <label htmlFor="email">
+    <form
+      className="
+      form-login flex flex-col min-h-screen justify-center items-center"
+    >
+      <img src={ logo } alt="logo" className="w-56 mb-16" />
+      <label
+        htmlFor="email"
+        className="label-text flex flex-col font-bold text-lg font-serif"
+      >
         Email:
         <input
           type="email"
@@ -41,10 +49,14 @@ function Login({ history }) {
           name="email"
           id="email"
           value={ newInputEmail }
+          className="input input-bordered text-lg mb-4"
           onChange={ handleChange }
         />
       </label>
-      <label htmlFor="password">
+      <label
+        htmlFor="password"
+        className="label-text flex flex-col font-bold text-lg font-serif"
+      >
         Senha:
         <input
           type="password"
@@ -53,6 +65,7 @@ function Login({ history }) {
           id="password"
           value={ newInputPassword }
           onChange={ handleChangePassword }
+          className="input input-bordered text-lg mb-4"
         />
       </label>
       <button
@@ -60,6 +73,7 @@ function Login({ history }) {
         type="button"
         disabled={ validateButton() }
         onClick={ handleClick }
+        className="btn-login btn w-1/2 btn-md font-mono font-bold"
       >
         Enter
       </button>

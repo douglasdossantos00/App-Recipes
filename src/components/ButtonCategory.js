@@ -22,8 +22,9 @@ function ButtonCategory({ page, category, id }) {
       type="button"
       data-testid={ `${category}-category-filter` }
       onClick={ () => handleClickCategories() }
+      className="btn"
     >
-      {category}
+      {category === 'Other/Unknown' ? 'other' : category}
 
     </button>
   );

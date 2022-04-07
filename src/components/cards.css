@@ -1,16 +1,26 @@
+.card-body {
+  color: #29194D;
+}
+
 .cards img {
   margin: 10px;
-  max-width: 200px;
+  max-width: 100%;
 }
 
-.recipe-photo {
-  margin: 10px;
-  max-width: 300px;
+.card-foods {
+  height: 445px;
 }
 
-.card-recomendation img {
-  margin: 10px;
-  max-width: 200px;
+.card-ingredients {
+  height: 640px;
+}
+
+.card-recomendation {
+  color: #29194D;
+}
+
+.details-recipe{
+  color: #29194D;
 }
 
 .card-recommendation-container {

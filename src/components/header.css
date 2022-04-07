@@ -1,4 +1,12 @@
-.header-icons {
+ .header-container {
+  position: fixed;
+  width: 360px;
+  color: #340599;
+  background-color: rgb(115, 70, 213, 0.3);
+  text-align: center;
+}
+
+/* .header-icons {
   display: flex;
   justify-content: space-between;
 }
@@ -12,3 +20,4 @@
   display: flex;
   justify-content: space-evenly;
 }
+ */

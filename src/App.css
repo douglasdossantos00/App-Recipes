@@ -1,18 +1,52 @@
-.meals {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
+body {
+  align-self: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin: auto;
+  width: 360px;
+  height: 640px;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.btn {
+  border-color: #4506cb;
+  color: #4506cb;
+  font-size: 15px;
+  margin: 5px;
+  width: 110px;
+}
+
+.btn-explore {
+  border-color: #4506cb;
+  color: #4506cb;
+  font-size: 15px;
+  margin: 5px;
+  width: 210px;
+}
+
+.btn-login {
+  background-color: #570df8;
+  color: white;
+}
+
+.btn-login:disabled {
+  background-color: #4506cb;
+  color: white;
+  opacity: 0.4;
+}
+
+.btn:hover {
+  background-color: #4406cbd8;
+  color: white;
+}
+
+/* .btn-return {
+} */
+
+.details-recipe {
+  height: 640px;
+}
+
+.div-explore {
+  height: 640px;
 }
 
 /*
@@ -28,6 +62,34 @@
   transform-origin: 60px 78px;
 }
 */
+
+.foods {
+  margin-top: -15.5px;
+}
+
+html {
+  background-image: url('images/bg-app-recipes.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.meals {
+  align-items: center;
+  background: #0fa36b;
+  color: #464646;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
@@ -65,4 +127,9 @@
   100% {
     transform: rotate(-10deg);
   }
+}
+
+.rocksGlass {
+  animation: shake 1s infinite ease;
+  max-height: 80vh;
 }
