@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Card from '../components/Card';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import fetchNationalities from '../services/fetchNationalities';
-import fetchRecipesByNationalities from '../services/fetchRecipesByNationalities';
 import RecipesContext from '../context/RecipesContext';
-import Card from '../components/Card';
+import fetchNationalities from '../services/fetchNationalities';
 import fetchRecipes from '../services/fetchRecipes';
+import fetchRecipesByNationalities from '../services/fetchRecipesByNationalities';
 
 function ExploreFoodsNationalities() {
   const [nationalities, setNationalities] = useState([]);
@@ -32,48 +32,51 @@ function ExploreFoodsNationalities() {
     setRecipes(fetch);
   };
   return (
-    <>
+    <div className="font-sans bg-white">
       <Header pageTitle="Explore Nationalities" />
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        onClick={ handleChangeNationalities }
-      >
-        <option
-          data-testid="All-option"
-          value="all"
+      <div className="pt-24 flex flex-col items-center">
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          className="mt-4 select select-primary w-full max-w-xs"
+          onClick={ handleChangeNationalities }
         >
-          All
-        </option>
-        {nationalities.meals && nationalities.meals.map((nationalty) => (
           <option
-            key={ nationalty.strArea }
-            data-testid={ `${nationalty.strArea}-option` }
-            value={ nationalty.strArea }
+            data-testid="All-option"
+            value="all"
           >
-            {nationalty.strArea}
+            All
           </option>
-        ))}
-      </select>
-      <div className="card-foods">
-        {foods.map((food, index) => {
-          const maxRecipes = 12;
-          if (index < maxRecipes) {
-            return (
-              <Card
-                key={ index }
-                index={ index }
-                name={ food.strMeal }
-                src={ food.strMealThumb }
-                page="foods"
-                idRecipe={ food.idMeal }
-              />
-            );
-          }
-          return true;
-        })}
+          {nationalities.meals && nationalities.meals.map((nationalty) => (
+            <option
+              key={ nationalty.strArea }
+              data-testid={ `${nationalty.strArea}-option` }
+              value={ nationalty.strArea }
+            >
+              {nationalty.strArea}
+            </option>
+          ))}
+        </select>
+        <div className="card-foods mt-2 flex flex-wrap justify-evenly overflow-y-auto">
+          {foods.map((food, index) => {
+            const maxRecipes = 12;
+            if (index < maxRecipes) {
+              return (
+                <Card
+                  key={ index }
+                  index={ index }
+                  name={ food.strMeal }
+                  src={ food.strMealThumb }
+                  page="foods"
+                  idRecipe={ food.idMeal }
+                />
+              );
+            }
+            return true;
+          })}
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 export default ExploreFoodsNationalities;

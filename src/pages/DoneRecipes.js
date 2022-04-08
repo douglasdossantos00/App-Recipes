@@ -24,59 +24,56 @@ function DoneRecipes() {
   }, []);
 
   return (
-    <>
-      <div className="flex flex-row">
-        <Header pageTitle="Done Recipes" history={ { push: () => { } } } />
-        {/* <Link to="/foods">
-          <button type="button">
-            <img
-              src={ returnIcon }
-              alt="btn-return"
-              className="btn-return w-8"
-            />
+    <div className="foods bg-white font-sans">
+      <Header pageTitle="Done Recipes" history={ { push: () => { } } } />
+      <div className="pt-20">
+        <div className="">
+          <button
+            data-testid="filter-by-all-btn"
+            type="button"
+            onClick={ handleClick }
+            name="all"
+            className="btn"
+          >
+            All
           </button>
-        </Link> */}
+          <button
+            data-testid="filter-by-food-btn"
+            type="button"
+            onClick={ handleClick }
+            name="food"
+            className="btn"
+          >
+
+            Food
+          </button>
+          <button
+            data-testid="filter-by-drink-btn"
+            type="button"
+            onClick={ handleClick }
+            name="drink"
+            className="btn"
+          >
+
+            Drinks
+          </button>
+        </div>
+        <div className="flex flex-col justify-evenly overflow-y-auto">
+          {
+
+            filter.map((elem, index) => (
+              <CardDoneRecipes
+                key={ elem.name }
+                recipe={ elem }
+                index={ index }
+                page={ elem.type === 'food' ? 'foods' : 'drinks' }
+              />
+
+            ))
+          }
+        </div>
       </div>
-      <button
-        data-testid="filter-by-all-btn"
-        type="button"
-        onClick={ handleClick }
-        name="all"
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-food-btn"
-        type="button"
-        onClick={ handleClick }
-        name="food"
-      >
-
-        Food
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        type="button"
-        onClick={ handleClick }
-        name="drink"
-      >
-
-        Drinks
-      </button>
-      {
-
-        filter.map((elem, index) => (
-          <CardDoneRecipes
-            key={ elem.name }
-            recipe={ elem }
-            index={ index }
-            page={ elem.type === 'food' ? 'foods' : 'drinks' }
-          />
-
-        ))
-      }
-
-    </>
+    </div>
 
   );
 }
