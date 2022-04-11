@@ -36,21 +36,23 @@ function CardFavoriteRecipes(
             {page === 'food' ? `${nationality} - ${category}` : `${nationality}`}
 
           </span>
-          <span data-testid={ `${index}-horizontal-name` }>{name}</span>
+          <div>
+            <span data-testid={ `${index}-horizontal-name` }>{name}</span>
+          </div>
         </Link>
-        <div className="">
+        <div className="buttons flex">
 
-          <ButtonShare
-            testID={ `${index}-horizontal-share-btn` }
-            page={ `${page}s` }
-            id={ id }
-          />
           <ButtonFavorite
             id={ id }
             url={ url }
             testID={ `${index}-horizontal-favorite-btn` }
             removeFavorite={ removeFavorite }
             isFavorite={ checkLocalStorage(id) }
+          />
+          <ButtonShare
+            testID={ `${index}-horizontal-share-btn` }
+            page={ `${page}s` }
+            id={ id }
           />
         </div>
       </div>

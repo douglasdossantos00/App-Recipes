@@ -30,6 +30,7 @@
 }
 
 .card-horizontal {
+  color: #29194d;
   display: flex;
   flex-direction: row;
   height: 160px;
@@ -44,7 +45,19 @@
 }
 
 .body-card {
+  
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: 5px;
   width: 50%;
 }
+
+.buttons {
+  align-self: flex-end;
+  display: flex;
+  margin-bottom: 7px;
+  width: 60%;
+}
+
