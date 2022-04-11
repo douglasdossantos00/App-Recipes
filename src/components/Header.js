@@ -27,8 +27,8 @@ function Header({ pageTitle, history }) {
 
   return (
     <header className="header-container z-10">
-      <div className="header-icons flex ">
-        <Link to="/profile">
+      <div className="header-icons navbar">
+        <Link to="/profile" className="flex-none">
           <button type="button">
             <img
               src={ profileIcon }
@@ -38,12 +38,14 @@ function Header({ pageTitle, history }) {
             />
           </button>
         </Link>
-        <h1
-          data-testid="page-title"
-          className="text-3xl"
-        >
-          { pageTitle }
-        </h1>
+        <div className="flex-1 flex justify-center items-start content-center">
+          <h1
+            data-testid="page-title"
+            className="text-3xl pt-2"
+          >
+            { pageTitle }
+          </h1>
+        </div>
         {
           (pageTitle === 'Foods' || pageTitle === 'Explore Nationalities'
 || pageTitle === 'Drinks')
@@ -51,6 +53,7 @@ function Header({ pageTitle, history }) {
   <button
     type="button"
     onClick={ handleClick }
+    className="flex-none"
   >
     <img
       src={ searchIcon }

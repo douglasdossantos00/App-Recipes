@@ -8,28 +8,37 @@ function CardDoneRecipes({ recipe, index, page }) {
   return (
     <div
       data-testid={ `${index}-recipe-card` }
-      className="cards
-      card sm:card-side bg-base-100 w-36 mx-2 my-4 h-52 shadow-xl items-center z-0"
+      className="
+      flex flex-row bg-base-100 mx-2 my-4 shadow-xl items-center z-0"
     >
+
       <Link to={ `/${page}/${recipe.id}` }>
-        <img
-          src={ recipe.image }
-          alt="card-img"
-          data-testid={ `${index}-horizontal-image` }
-          className="mt-0"
-        />
+        <figure>
+          <img
+            src={ recipe.image }
+            alt="card-img"
+            data-testid={ `${index}-horizontal-image` }
+            className="mt-0"
+          />
+        </figure>
 
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          { recipe.alcoholicOrNot || `${recipe.nationality} - ${recipe.category}`}
-        </span>
+        <div className="">
+          <span
+            data-testid={ `${index}-horizontal-top-text` }
+            className=""
+          >
+            { recipe.alcoholicOrNot || `${recipe.nationality} - ${recipe.category}`}
+          </span>
 
-        <span data-testid={ `${index}-horizontal-name` }>{recipe.name}</span>
+          <span data-testid={ `${index}-horizontal-name` }>{recipe.name}</span>
+        </div>
       </Link>
 
       <ButtonShare
         testID={ `${index}-horizontal-share-btn` }
         page={ page }
         id={ recipe.id }
+        className=""
       />
       <span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>
       {
