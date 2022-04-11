@@ -21,28 +21,39 @@ function CardFavoriteRecipes(
   const url = `https://www.${typeRecipes}.com/api/json/v1/1/lookup.php?i=${id}`;
 
   return (
-    <div data-testid={ `${index}-recipe-card` } className="cards">
+    <div
+      data-testid={ `${index}-recipe-card` }
+      className="card-horizontal card
+    bg-base-100 mx-2 my-4 shadow-xl z-0"
+    >
       <Link to={ `/${page}s/${id}` }>
         <img src={ src } alt="card-img" data-testid={ `${index}-horizontal-image` } />
-        <span data-testid={ `${index}-horizontal-top-text` }>
-
-          {page === 'food' ? `${nationality} - ${category}` : `${nationality}`}
-
-        </span>
-        <span data-testid={ `${index}-horizontal-name` }>{name}</span>
       </Link>
-      <ButtonShare
-        testID={ `${index}-horizontal-share-btn` }
-        page={ `${page}s` }
-        id={ id }
-      />
-      <ButtonFavorite
-        id={ id }
-        url={ url }
-        testID={ `${index}-horizontal-favorite-btn` }
-        removeFavorite={ removeFavorite }
-        isFavorite={ checkLocalStorage(id) }
-      />
+      <div className="body-card">
+        <Link to={ `/${page}s/${id}` }>
+          <span data-testid={ `${index}-horizontal-top-text` }>
+
+            {page === 'food' ? `${nationality} - ${category}` : `${nationality}`}
+
+          </span>
+          <span data-testid={ `${index}-horizontal-name` }>{name}</span>
+        </Link>
+        <div className="">
+
+          <ButtonShare
+            testID={ `${index}-horizontal-share-btn` }
+            page={ `${page}s` }
+            id={ id }
+          />
+          <ButtonFavorite
+            id={ id }
+            url={ url }
+            testID={ `${index}-horizontal-favorite-btn` }
+            removeFavorite={ removeFavorite }
+            isFavorite={ checkLocalStorage(id) }
+          />
+        </div>
+      </div>
     </div>
 
   );

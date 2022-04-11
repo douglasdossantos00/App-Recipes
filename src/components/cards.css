@@ -1,5 +1,5 @@
 .card-body {
-  color: #29194D;
+  color: #29194d;
 }
 
 .cards img {
@@ -16,15 +16,35 @@
 }
 
 .card-recomendation {
-  color: #29194D;
+  color: #29194d;
 }
 
-.details-recipe{
-  color: #29194D;
+.details-recipe {
+  color: #29194d;
 }
 
 .card-recommendation-container {
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
+}
+
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  height: 160px;
+  padding: 0;
+  width: 320px;
+}
+
+.card-horizontal img {
+  height: 100%;
+  margin: 0;
+  width: 160px;
+}
+
+.body-card {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }

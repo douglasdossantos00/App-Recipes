@@ -23,7 +23,7 @@ function ButtonFavorite({ url, id, testID, removeFavorite, isFavorite }) {
   };
   const icon = isClicked ? blackHeartIcon : whiteHeartIcon;
   return (
-    <button type="button">
+    <button type="button" className="justify-self-end self-end w-1/2">
       <input
         type="image"
         alt="button-favorite"
