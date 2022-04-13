@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -18,10 +18,10 @@ function Profile({ history }) {
   };
 
   return (
-    <>
+    <div className="bg-white div-explore font-sans flex justify-center">
+      {' '}
       <Header pageTitle="Profile" />
-      <div>
-
+      <div className="pt-20 flex flex-col justify-center items-center">
         <p data-testid="profile-email">
           { email }
         </p>
@@ -30,6 +30,7 @@ function Profile({ history }) {
           <button
             type="button"
             data-testid="profile-done-btn"
+            className=" btn btn-explore my-4"
           >
             Done Recipes
           </button>
@@ -39,6 +40,7 @@ function Profile({ history }) {
           <button
             type="button"
             data-testid="profile-favorite-btn"
+            className=" btn btn-explore my-4"
           >
             Favorite Recipes
           </button>
@@ -48,13 +50,14 @@ function Profile({ history }) {
           type="button"
           data-testid="profile-logout-btn"
           onClick={ funcLogout }
+          className=" btn btn-explore my-4"
         >
           Logout
         </button>
 
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

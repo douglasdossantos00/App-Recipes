@@ -8,48 +8,44 @@ function CardDoneRecipes({ recipe, index, page }) {
   return (
     <div
       data-testid={ `${index}-recipe-card` }
-      className="
-      flex flex-row bg-base-100 mx-2 my-4 shadow-xl items-center z-0"
+      className="card-horizontal card
+    bg-base-100 mx-2 my-4 shadow-xl z-0"
     >
-
       <Link to={ `/${page}/${recipe.id}` }>
-        <figure>
-          <img
-            src={ recipe.image }
-            alt="card-img"
-            data-testid={ `${index}-horizontal-image` }
-            className="mt-0"
-          />
-        </figure>
-
-        <div className="">
-          <span
-            data-testid={ `${index}-horizontal-top-text` }
-            className=""
-          >
-            { recipe.alcoholicOrNot || `${recipe.nationality} - ${recipe.category}`}
-          </span>
-
-          <span data-testid={ `${index}-horizontal-name` }>{recipe.name}</span>
-        </div>
+        <img
+          src={ recipe.image }
+          alt="card-img"
+          data-testid={ `${index}-horizontal-image` }
+          className="mt-0 w-28"
+        />
       </Link>
-
-      <ButtonShare
-        testID={ `${index}-horizontal-share-btn` }
-        page={ page }
-        id={ recipe.id }
-        className=""
-      />
-      <span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>
-      {
-        recipe.tags.map((elem) => (
-          <span
-            key={ elem }
-            data-testid={ `${index}-${elem}-horizontal-tag` }
-          >
-            {elem}
-          </span>))
-      }
+      <div className="body-card">
+        <ButtonShare
+          testID={ `${index}-horizontal-share-btn` }
+          page={ page }
+          id={ recipe.id }
+        />
+        <Link to={ `/${page}/${recipe.id}` }>
+          <div>
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { recipe.alcoholicOrNot || `${recipe.nationality} - ${recipe.category}`}
+            </span>
+            <span data-testid={ `${index}-horizontal-name` }>{` - ${recipe.name}`}</span>
+          </div>
+        </Link>
+        <span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>
+        {
+          recipe.tags.map((elem) => (
+            <span
+              key={ elem }
+              data-testid={ `${index}-${elem}-horizontal-tag` }
+            >
+              {elem}
+            </span>))
+        }
+      </div>
     </div>
 
   );

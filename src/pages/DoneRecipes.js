@@ -24,7 +24,7 @@ function DoneRecipes() {
   }, []);
 
   return (
-    <div className="foods bg-white font-sans">
+    <div className="done-recipes bg-white font-sans">
       <Header pageTitle="Done Recipes" history={ { push: () => { } } } />
       <div className="pt-20">
         <div className="">
@@ -44,7 +44,6 @@ function DoneRecipes() {
             name="food"
             className="btn"
           >
-
             Food
           </button>
           <button
@@ -54,13 +53,11 @@ function DoneRecipes() {
             name="drink"
             className="btn"
           >
-
             Drinks
           </button>
         </div>
-        <div className="flex flex-col justify-evenly overflow-y-auto">
+        <div className="card-done flex mt-2 flex-wrap justify-evenly overflow-y-auto">
           {
-
             filter.map((elem, index) => (
               <CardDoneRecipes
                 key={ elem.name }
@@ -68,7 +65,6 @@ function DoneRecipes() {
                 index={ index }
                 page={ elem.type === 'food' ? 'foods' : 'drinks' }
               />
-
             ))
           }
         </div>

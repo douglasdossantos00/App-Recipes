@@ -11,7 +11,7 @@ function ButtonShare({ page, id, testID }) {
   };
 
   return (
-    <div className="justify-self-end self-end w-1/2">
+    <div className="justify-self-end self-end btn-share mr-2">
       <button
         type="button"
       >

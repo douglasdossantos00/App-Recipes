@@ -38,15 +38,12 @@ body {
   color: white;
 }
 
-/* .btn-return {
-} */
-
-.details-recipe {
+.details-recipe, .div-explore {
   height: 640px;
 }
 
-.div-explore {
-  height: 640px;
+.done-recipes {
+  height: 695px;
 }
 
 /*

@@ -7,6 +7,10 @@
   max-width: 100%;
 }
 
+.card-done {
+  height:550px;
+}
+
 .card-foods {
   height: 445px;
 }
@@ -61,3 +65,6 @@
   width: 60%;
 }
 
+.btn-share {
+  width: 30px;
+}
