@@ -1,9 +1,9 @@
 body {
   align-self: auto;
   background-color: rgba(255, 255, 255, 0.7);
+  height: 640px;
   margin: auto;
   width: 360px;
-  height: 640px;
 }
 
 .btn {

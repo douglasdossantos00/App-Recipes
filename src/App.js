@@ -53,7 +53,7 @@ function App() {
         <Route path="/foods/:id/in-progress" component={ FoodsIdRecipesProgress } />
         <Route exact path="/drinks/:id" component={ DrinksIdRecipes } />
         <Route exact path="/foods/:id" component={ FoodsIdRecipes } />
-        <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </div>
 
