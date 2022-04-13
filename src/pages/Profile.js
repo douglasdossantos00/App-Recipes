@@ -8,7 +8,8 @@ function Profile({ history }) {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const profileEmail = localStorage.getItem('user');
+    const profileEmail = JSON.parse(localStorage.getItem('user'));
+    console.log(profileEmail);
     setEmail(profileEmail);
   }, []);
 
@@ -19,13 +20,11 @@ function Profile({ history }) {
 
   return (
     <div className="bg-white div-explore font-sans flex justify-center">
-      {' '}
       <Header pageTitle="Profile" />
       <div className="pt-20 flex flex-col justify-center items-center">
         <p data-testid="profile-email">
-          { email }
+          { email.email }
         </p>
-
         <Link to="/done-recipes">
           <button
             type="button"
@@ -35,7 +34,6 @@ function Profile({ history }) {
             Done Recipes
           </button>
         </Link>
-
         <Link to="/favorite-recipes">
           <button
             type="button"
@@ -45,7 +43,6 @@ function Profile({ history }) {
             Favorite Recipes
           </button>
         </Link>
-
         <button
           type="button"
           data-testid="profile-logout-btn"

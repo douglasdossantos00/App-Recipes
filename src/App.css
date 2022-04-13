@@ -33,12 +33,21 @@ body {
   opacity: 0.4;
 }
 
+.btn-not-found {
+  background-color: #4506cb;
+  color: white;
+  font-size: 15px;
+  margin: 5px;
+  width: 210px;
+}
+
 .btn:hover {
   background-color: #4406cbd8;
   color: white;
 }
 
-.details-recipe, .div-explore {
+.details-recipe,
+.div-explore {
   height: 640px;
 }
 
@@ -65,7 +74,7 @@ body {
 }
 
 html {
-  background-image: url('images/bg-app-recipes.jpg');
+  background-image: url("images/bg-app-recipes.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   bottom: 0;
@@ -91,13 +100,25 @@ html {
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
-  font-family: Montserrat , sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 3em;
   font-weight: 900;
 }
 
-@keyframes shake {
+.not-found {
+  color: #340599;
+  height: 640px;
+  background-image: url("images/evNotFound.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  position: relative;
+  z-index: 2;
+  background-color: white;
 
+}
+
+
+@keyframes shake {
   0% {
     transform: rotate(5deg);
   }
@@ -112,7 +133,6 @@ html {
 }
 
 @keyframes clink {
-
   0% {
     transform: rotate(-10deg);
   }
