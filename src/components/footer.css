@@ -10,16 +10,16 @@
 .start-recipes-footer {
   align-items: center;
   background-color: #4406cbd8;
-  color: #fff;
   border-radius: 4px;
   bottom: 0;
+  color: white;
   display: flex;
   font-size: 20px;
   height: 57px;
   justify-content: space-around;
+  margin-left: -24.5px;
   position: fixed;
   width: 360px;
-  margin-left: -24.5px;
 }
 
 .start-recipes-footer:hover {

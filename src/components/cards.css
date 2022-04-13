@@ -8,7 +8,7 @@
 }
 
 .card-done {
-  height:550px;
+  height: 550px;
 }
 
 .card-foods {
@@ -49,12 +49,11 @@
 }
 
 .body-card {
-  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 20px;
   margin-left: 5px;
+  margin-top: 20px;
   width: 50%;
 }
 

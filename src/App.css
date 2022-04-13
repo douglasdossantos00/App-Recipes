@@ -1,8 +1,8 @@
 body {
   align-self: auto;
   background-color: rgba(255, 255, 255, 0.7);
-  margin: auto;
   height: 640px;
+  margin: auto;
   width: 360px;
 }
 
@@ -46,8 +46,7 @@ body {
   color: white;
 }
 
-.details-recipe,
-.div-explore {
+.details-recipe, .div-explore {
   height: 640px;
 }
 
@@ -55,26 +54,12 @@ body {
   height: 695px;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
 .foods {
   margin-top: -15.5px;
 }
 
 html {
-  background-image: url("images/bg-app-recipes.jpg");
+  background-image: url('images/bg-app-recipes.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   bottom: 0;
@@ -100,25 +85,25 @@ html {
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat , sans-serif;
   font-size: 3em;
   font-weight: 900;
 }
 
 .not-found {
-  color: #340599;
-  height: 640px;
-  background-image: url("images/evNotFound.png");
+  background-color: white;
+  background-image: url('images/evNotFound.png');
   background-repeat: no-repeat;
   background-size: auto;
+  color: #340599;
+  height: 640px;
   position: relative;
   z-index: 2;
-  background-color: white;
-
 }
 
 
 @keyframes shake {
+
   0% {
     transform: rotate(5deg);
   }
@@ -133,6 +118,7 @@ html {
 }
 
 @keyframes clink {
+
   0% {
     transform: rotate(-10deg);
   }
