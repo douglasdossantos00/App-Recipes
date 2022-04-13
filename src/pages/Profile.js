@@ -8,7 +8,8 @@ function Profile({ history }) {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const profileEmail = localStorage.getItem('user');
+    const profileEmail = JSON.parse(localStorage.getItem('user'));
+    console.log(profileEmail);
     setEmail(profileEmail);
   }, []);
 
@@ -23,7 +24,7 @@ function Profile({ history }) {
       <div>
 
         <p data-testid="profile-email">
-          { email }
+          { email.email }
         </p>
 
         <Link to="/done-recipes">
